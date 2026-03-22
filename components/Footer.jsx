@@ -1,35 +1,33 @@
 // components/Footer.jsx
 import Link from "next/link";
 import siteConfig from "../data/siteConfig";
+import { useTranslation } from "../hooks/useTranslation";
 
 export default function Footer() {
   const { nom, slogan, email, reseaux } = siteConfig;
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-ink text-white mt-24">
       <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
 
-        {/* Colonne 1 */}
         <div>
           <h3 className="font-display text-2xl tracking-wider mb-2">{nom}</h3>
           <p className="font-accent italic text-gray-400 text-sm mb-4">{slogan}</p>
-          <p className="text-gray-500 text-sm leading-relaxed">
-            Ministère chrétien œuvrant pour susciter une génération entière dédiée à Dieu.
-          </p>
+          <p className="text-gray-500 text-sm leading-relaxed">{t.footer.desc}</p>
         </div>
 
-        {/* Colonne 2 */}
         <div>
-          <h4 className="font-body font-semibold text-xs tracking-widest uppercase text-gray-400 mb-5">Navigation</h4>
+          <h4 className="font-body font-semibold text-xs tracking-widest uppercase text-gray-400 mb-5">{t.footer.nav}</h4>
           <ul className="space-y-2.5">
             {[
-              ["/",           "Accueil"],
-              ["/apropos",    "Vision"],
-              ["/evenements", "Événements"],
-              ["/cultes",     "Programme des cultes"],
-              ["/leaders",    "Leaders"],
-              ["/medias",     "Médias"],
-              ["/contact",    "Contact"],
+              ["/",           t.nav.accueil],
+              ["/apropos",    t.nav.vision],
+              ["/evenements", t.nav.evenements],
+              ["/cultes",     t.nav.cultes],
+              ["/leaders",    t.nav.leaders],
+              ["/medias",     t.nav.medias],
+              ["/contact",    t.nav.contact],
             ].map(([href, label]) => (
               <li key={href}>
                 <Link href={href} className="text-gray-500 text-sm hover:text-white transition-colors">
@@ -40,9 +38,8 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Colonne 3 */}
         <div>
-          <h4 className="font-body font-semibold text-xs tracking-widest uppercase text-gray-400 mb-5">Contact</h4>
+          <h4 className="font-body font-semibold text-xs tracking-widest uppercase text-gray-400 mb-5">{t.footer.contact}</h4>
           <a href={`mailto:${email}`} className="text-gray-400 text-sm hover:text-white transition-colors block mb-6">
             {email}
           </a>
@@ -57,10 +54,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
       <div className="border-t border-gray-800 py-5 text-center">
         <p className="text-gray-600 text-xs">
-          © {new Date().getFullYear()} {nom}. Tous droits réservés.
+          © {new Date().getFullYear()} {nom}. {t.footer.copy}
         </p>
       </div>
     </footer>

@@ -11,13 +11,13 @@ const en = {
     rejoindre:  "Join us",
   },
   hero: {
-    tag:          "Romans 11:4",
+    tag:          "1 Kings 19:18",
     slogan:       "A generation set apart",
     btnEvents:    "See events",
     btnVision:    "Our vision",
     scrollLabel:  "Scroll",
-    verset:       "\"I have reserved seven thousand men who have not bowed the knee to Baal.\"",
-    versetRef:    "Romans 11:4",
+    verset:       "\"Yet I have left me seven thousand in Israel, all the knees which have not bowed unto Baal, and every mouth which hath not kissed him.\"",
+    versetRef:    "1 Kings 19:18",
   },
   home: {
     visionTag:      "Our DNA",
@@ -42,14 +42,7 @@ const en = {
     visionText:   "To become a reference center for spiritual and prophetic training, where every believer discovers their identity, develops their gifts, and fulfills their divine destiny.",
     valuesTag:    "What defines us",
     valuesTitle:  "OUR VALUES",
-    values: [
-      { titre: "CONSECRATION", texte: "A life entirely given to God, without compromise." },
-      { titre: "FIRE",         texte: "A heart burning with love for God and for souls." },
-      { titre: "TRUTH",        texte: "Anchored in the Word of God as the sole authority." },
-      { titre: "FAMILY",       texte: "A united, brotherly people, building together." },
-      { titre: "MISSION",      texte: "Sent to the ends of the earth." },
-      { titre: "EXCELLENCE",   texte: "Serving God with our whole being and our best efforts." },
-    ],
+    
   },
   evenements: {
     tag:         "Schedule",
