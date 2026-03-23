@@ -4,7 +4,7 @@ import siteConfig from "../data/siteConfig";
 import { useTranslation } from "../hooks/useTranslation";
 
 export default function Footer() {
-  const { nom, slogan, email, reseaux } = siteConfig;
+  const { nom, slogan, email, reseaux, telephone} = siteConfig;
   const { t } = useTranslation();
 
   return (

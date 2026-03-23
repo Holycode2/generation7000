@@ -7,7 +7,7 @@ const siteConfig = {
   slogan: "Une génération mise à part",
   description: "La Génération 7000 est une structure dont la mission est de vous inviter à redécouvrir l'Évangile de Christ et à comprendre son Royaume.",
   email: "generation7kministries@gmail.com",            // ← change ici
-  telephone: "+7 (991)-232-01-35",                  // ← change ici
+  telephone: "+7(991)-232-01-35",                  // ← change ici
 
   // ── RÉSEAUX SOCIAUX ────────────────────────────────────
 
