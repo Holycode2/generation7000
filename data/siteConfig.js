@@ -5,12 +5,12 @@
 const siteConfig = {
   nom: "Génération 7000",
   slogan: "Une génération mise à part",
-  description: "Ministère chrétien dédié à susciter une génération entière consacrée à Dieu, brûlant de feu et marchant dans la destinée divine.",
+  description: "La Génération 7000 est une structure dont la mission est de vous inviter à redécouvrir l'Évangile de Christ et à comprendre son Royaume.",
   email: "generation7kministries@gmail.com",            // ← change ici
   telephone: "+7 (991)-232-01-35",                  // ← change ici
 
   // ── RÉSEAUX SOCIAUX ────────────────────────────────────
-  // Remplace chaque URL par le vrai lien. Supprime une clé si le réseau n'existe pas.
+
   reseaux: {
     instagram1:  { label: "@g7k.global",  url: "https://www.instagram.com/g7k.global?igsh=MWhhbmkwYjMwaHY0OA==" },
     instagram2:  { label: "@g7k_united",   url: "https://www.instagram.com/g7k_united?igsh=Y2NqamM1cmdhMzh6" },
