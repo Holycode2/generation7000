@@ -24,8 +24,8 @@ const leaders = [
     role_en: "General Administrator",
     niveau: 2,
     photo: "/images/daniel-mbal.PNG",
-    bio:    "Daniel Mbal sert au sein de Génération 7000 depuis 2022 en tant qu'Administrateur Général. Musicien et artiste dans l'âme, il supervise les départements Musique et Art du ministère avec passion et excellence. Sa conviction est simple : l'art et la musique sont des portes puissantes pour toucher les cœurs et glorifier Dieu.",
-    bio_en: "Daniel Mbal has been serving within Generation 7000 since 2022 as General Administrator. A musician and artist at heart, he oversees the Music and Arts departments of the ministry with passion and excellence. His conviction is simple: art and music are powerful gateways to touch hearts and glorify God.",
+    bio:    " ",
+    bio_en: "",
     versets:    ["« Tout ce que vous faites, faites-le de bon cœur, comme pour le Seigneur. » — Colossiens 3:23"],
     versets_en: ["\"Whatever you do, do it heartily, as to the Lord and not to men.\" — Colossians 3:23"],
     reseaux: {
