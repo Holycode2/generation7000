@@ -5,7 +5,7 @@ import Head from "next/head";
 
 export default function Layout({ children, title, description }) {
   const pageTitle = title ? `${title} — Génération 7000` : "Génération 7000 | Une génération mise à part";
-  const pageDesc  = description || "Ministère chrétien dédié à susciter une génération consacrée à Dieu.";
+  const pageDesc  = description || "La Génération 7000 est une structure dont la mission est de vous inviter à redécouvrir l'Évangile de Christ et à comprendre son Royaume.";
   return (
     <>
       <Head>
