@@ -6,7 +6,6 @@ import leaders from "../data/leaders";
 import siteConfig from "../data/siteConfig";
 import { useRouter } from "next/router";
 
-// ── TEXTES FR / EN ─────────────────────────────────────────────────────────
 const TEXTES = {
   fr: {
     tag:         "1 Rois 19:18",
@@ -59,6 +58,11 @@ export default function Home() {
   const prochains     = evenements.slice(0, 3);
   const leaderVedette = leaders[0];
 
+  // Champs traduits du leader vedette
+  const leaderNom  = locale === "en" && leaderVedette.nom_en  ? leaderVedette.nom_en  : leaderVedette.nom;
+  const leaderRole = locale === "en" && leaderVedette.role_en ? leaderVedette.role_en : leaderVedette.role;
+  const leaderBio  = locale === "en" && leaderVedette.bio_en  ? leaderVedette.bio_en  : leaderVedette.bio;
+
   return (
     <Layout title="Accueil" description={siteConfig.description}>
 
@@ -71,40 +75,18 @@ export default function Home() {
           backgroundPosition: "center",
           backgroundRepeat:   "no-repeat",
         }}>
-
-        {/* Overlay sombre */}
         <div className="absolute inset-0 bg-black/70" />
-
-        {/* Grain texture subtil */}
         <div className="absolute inset-0 opacity-[0.03]"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto">
-
-          {/* Tag verset */}
-          <p className="animate-fade-in font-body text-white tracking-[0.5em] uppercase mb-8 text-xs">
-            {t.tag}
-          </p>
-
-          {/* Titre */}
+          <p className="animate-fade-in font-body text-white tracking-[0.5em] uppercase mb-8 text-xs">{t.tag}</p>
           <h1 className="animate-fade-in-up font-display text-white leading-none tracking-wider mb-0"
-            style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}>
-            {t.titre1}
-          </h1>
+            style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}>{t.titre1}</h1>
           <h1 className="animate-fade-in-up font-display text-white leading-none tracking-wider mb-8"
-            style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}>
-            {t.titre2}
-          </h1>
-
-          {/* Séparateur */}
+            style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}>{t.titre2}</h1>
           <div className="w-12 h-px bg-white/30 mx-auto mb-8" />
-
-          {/* Slogan */}
-          <p className="animate-fade-in-up-delay font-accent italic text-gray-300 text-xl md:text-2xl mb-12">
-            {t.slogan}
-          </p>
-
-          {/* Boutons */}
+          <p className="animate-fade-in-up-delay font-accent italic text-gray-300 text-xl md:text-2xl mb-12">{t.slogan}</p>
           <div className="animate-fade-in-up-delay-2 flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/evenements"
               className="bg-white text-ink font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-gray-100 transition-all duration-300">
@@ -117,14 +99,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
           <span className="text-white text-xs tracking-widest uppercase font-body">{t.scroll}</span>
           <div className="w-px h-10 bg-gradient-to-b from-white to-transparent" />
         </div>
       </section>
 
-      {/* ── VISION APERÇU ────────────────────────────────── */}
+      {/* ── VISION ────────────────────────────────────────── */}
       <section className="py-28 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-5">{t.visionTag}</p>
@@ -138,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── ÉVÉNEMENTS ───────────────────────────────────── */}
+      {/* ── ÉVÉNEMENTS ────────────────────────────────────── */}
       <section className="py-28 px-6 bg-ash">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-4">
@@ -161,12 +142,21 @@ export default function Home() {
                     day: "numeric", month: "long", year: "numeric"
                   })}
                 </p>
+
+                {/* ← TITRE TRADUIT */}
                 <h3 className="font-display text-2xl text-ink tracking-wide mb-4 leading-tight group-hover:text-gray-700 transition-colors">
-                  {evt.titre}
+                  {locale === "en" && evt.titre_en ? evt.titre_en : evt.titre}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">{evt.description.slice(0, 90)}…</p>
+
+                {/* ← DESCRIPTION TRADUITE */}
+                <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  {(locale === "en" && evt.description_en ? evt.description_en : evt.description).slice(0, 90)}…
+                </p>
+
+                {/* ← LIEU TRADUIT */}
                 <div className="flex items-center gap-2 text-gray-400 text-xs">
-                  <span>📍</span><span>{evt.lieu}</span>
+                  <span>📍</span>
+                  <span>{locale === "en" && evt.lieu_en ? evt.lieu_en : evt.lieu}</span>
                 </div>
               </div>
             ))}
@@ -174,7 +164,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── VERSET ───────────────────────────────────────── */}
+      {/* ── VERSET ────────────────────────────────────────── */}
       <section className="py-28 px-6 bg-ink">
         <div className="max-w-3xl mx-auto text-center">
           <div className="w-12 h-px bg-white/20 mx-auto mb-10" />
@@ -186,38 +176,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── LEADER VEDETTE ───────────────────────────────── */}
+      {/* ── LEADER VEDETTE ────────────────────────────────── */}
       <section className="py-28 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-16 items-center">
 
-            {/* Photo */}
             <div className="flex-shrink-0">
               <div className="w-56 h-56 bg-ash-dark overflow-hidden">
                 {leaderVedette.photo ? (
-                  <img src={leaderVedette.photo} alt={leaderVedette.nom}
+                  <img src={leaderVedette.photo} alt={leaderNom}
                     className="w-full h-full object-cover"
                     onError={(e) => { e.target.style.display='none'; }} />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
                     <span className="font-display text-4xl text-gray-400">
-                      {leaderVedette.nom.split(" ").map(w => w[0]).join("").slice(0, 2)}
+                      {leaderNom.split(" ").map(w => w[0]).join("").slice(0, 2)}
                     </span>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Texte */}
             <div>
               <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{t.leaderTag}</p>
+              {/* ← NOM TRADUIT */}
               <h2 className="font-display text-4xl md:text-5xl text-ink tracking-wider mb-2">
-                {leaderVedette.nom.toUpperCase()}
+                {leaderNom.toUpperCase()}
               </h2>
-              <p className="font-accent italic text-gray-500 text-lg mb-6">{leaderVedette.role}</p>
+              {/* ← RÔLE TRADUIT */}
+              <p className="font-accent italic text-gray-500 text-lg mb-6">{leaderRole}</p>
               <div className="divider-left" />
+              {/* ← BIO TRADUITE */}
               <p className="text-gray-600 leading-relaxed mb-8 max-w-lg">
-                {leaderVedette.bio.slice(0, 160)}…
+                {leaderBio ? leaderBio.slice(0, 160) + "…" : ""}
               </p>
               <div className="flex gap-4 flex-wrap">
                 <Link href={`/leaders/${leaderVedette.slug}`}

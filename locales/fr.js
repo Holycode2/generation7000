@@ -96,7 +96,7 @@ const fr = {
     confirm:    "✓ Votre client mail s'est ouvert !",
   },
   footer: {
-    desc:    "Ministère chrétien œuvrant pour susciter une génération entière dédiée à Dieu.",
+    desc:    "Nous formons des ouvriers pour la moisson et développons leurs talents avec soin.",
     nav:     "Navigation",
     contact: "Contact",
     copy:    "Tous droits réservés.",

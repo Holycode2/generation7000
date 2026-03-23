@@ -48,7 +48,7 @@ const en = {
     tag:         "Schedule",
     title:       "EVENTS",
     subtitle:    "Find all our gatherings, conferences and spiritual retreats.",
-    btnInscrire: "Register",
+    btnInscrire: "Follow",
     empty:       "No events at the moment. Check back soon!",
     voir:        "See on our social media →",
   },
