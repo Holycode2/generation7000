@@ -12,7 +12,7 @@ export default function Layout({ children, title, description }) {
         <title>{pageTitle}</title>
         <meta name="description" content={pageDesc} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/g7k.png" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDesc} />
       </Head>
