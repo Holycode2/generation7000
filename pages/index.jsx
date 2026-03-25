@@ -82,7 +82,7 @@ export default function Home() {
         <div className="relative z-10 text-center max-w-4xl mx-auto">
           <p style= {{color:"#FFFFFF"}}className="animate-fade-in font-body text-white tracking-[0.5em] uppercase mb-8 text-xs">{t.tag}</p>
           <h1 className="animate-fade-in-up font-display text-white leading-none tracking-wider mb-0"
-            style={{ fontSize: "clamp(7rem, 16vw, 9rem)" }}>{t.titre1}</h1>
+            style={{ fontSize: "clamp(5rem, 13vw, 8rem)" }}>{t.titre1}</h1>
           <h1 className="animate-fade-in-up font-display text-white leading-none tracking-wider mb-8"
           style={{color: "#980000", fontSize: "clamp(4rem, 10vw, 7rem)" }}>{t.titre2}</h1>
           <div className="w-12 h-px bg-white/30 mx-auto mb-8" />
