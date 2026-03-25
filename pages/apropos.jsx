@@ -102,10 +102,10 @@ export default function Apropos() {
       <section className="py-24 px-6 bg-ink text-center">
         <div className="max-w-2xl mx-auto">
           <div className="w-12 h-px bg-white/20 mx-auto mb-10" />
-          <blockquote className="font-accent italic text-white/70 text-2xl leading-relaxed mb-6">
+          <blockquote style={{color:"#980000"}} className="font-accent italic text-white/70 text-2xl leading-relaxed mb-6">
             {t.verset}
           </blockquote>
-          <p className="font-body text-gray-500 text-xs tracking-widest uppercase">{t.versetRef}</p>
+          <p style={{color:"#980000"}}className="font-body text-gray-500 text-xs tracking-widest uppercase">{t.versetRef}</p>
           <div className="w-12 h-px bg-white/20 mx-auto mt-10" />
         </div>
       </section>
