@@ -40,7 +40,7 @@ export default function Footer() {
 
         <div>
           <h4 className="font-body font-semibold text-xs tracking-widest uppercase text-gray-400 mb-5">{t.footer.contact}</h4>
-          <a href={`mailto:${email}`} className="text-gray-400 text-sm hover:text-white transition-colors block mb-6">
+          <a href={`mailto:${email}`} className="text-gray-400 text-sm hover:text-[#980000] transition-colors block mb-6">
             {email}
           </a>
           <div className="flex flex-wrap gap-2">

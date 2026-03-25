@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       // ── PALETTE NOIR & BLANC MODERNE ────────────────────
       colors: {
-        ink:   { DEFAULT: "#011224ff", light: "#1F1F1F", soft: "#3A3A3A" },
+        ink:   { DEFAULT: "#011224ff", light: "#1F1F1F", soft: "#980000" },
         ash:   { DEFAULT: "#F7F7F7", dark: "#EEEEEE", deeper: "#E0E0E0" },
         accent:{ DEFAULT: "#0D0D0D", hover: "#980000" },
       },

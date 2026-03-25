@@ -124,8 +124,8 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-4">
             <div>
-              <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{t.eventsTag}</p>
-              <h2  style= {{ color:"#980000"}}className="font-display text-5xl md:text-6xl text-ink tracking-wider">{t.eventsTitre}</h2>
+              <p style={{color:"#980000"}}className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{t.eventsTag}</p>
+              <h2  className="font-display text-5xl md:text-6xl text-ink tracking-wider">{t.eventsTitre}</h2>
             </div>
             <Link href="/evenements"
               style={{color: "#980000"}}className="font-body text-xs tracking-widest uppercase text-gray-500 hover:text-ink border-b border-gray-300 hover:border-ink pb-0.5 transition-colors self-start md:self-auto">
@@ -168,10 +168,10 @@ export default function Home() {
       <section className="py-28 px-6 bg-ink">
         <div className="max-w-3xl mx-auto text-center">
           <div className="w-12 h-px bg-white/20 mx-auto mb-10" />
-          <blockquote className="font-accent italic text-white/70 text-2xl md:text-3xl leading-relaxed mb-6">
+          <blockquote style= {{color: "#980000"}}className="font-accent italic text-white/70 text-2xl md:text-3xl leading-relaxed mb-6">
             {t.verset}
           </blockquote>
-          <p className="font-body text-gray-500 text-xs tracking-widest uppercase">{t.versetRef}</p>
+          <p style={{color:"#980000"}}className="font-bold text-gray-500 text-xs tracking-widest uppercase">{t.versetRef}</p>
           <div className="w-12 h-px bg-white/20 mx-auto mt-10" />
         </div>
       </section>
@@ -198,13 +198,13 @@ export default function Home() {
             </div>
 
             <div>
-              <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{t.leaderTag}</p>
+              <p style={{color:"#980000"}}className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{t.leaderTag}</p>
               {/* ← NOM TRADUIT */}
               <h2 className="font-display text-4xl md:text-5xl text-ink tracking-wider mb-2">
                 {leaderNom.toUpperCase()}
               </h2>
               {/* ← RÔLE TRADUIT */}
-              <p className="font-accent italic text-gray-500 text-black mb-6">{leaderRole}</p>
+              <p style={{color: "#980000"}}className="font-accent italic text-gray-500 text-black mb-6">{leaderRole}</p>
               <div className="divider-left" />
               {/* ← BIO TRADUITE */}
               <p className="text-gray-600 leading-relaxed mb-8 max-w-lg">

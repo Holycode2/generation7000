@@ -99,7 +99,7 @@ const en = {
     confirm:    "✓ Your mail client has opened!",
   },
   footer: {
-    desc:    "Christian ministry working to raise up an entire generation dedicated to God.",
+    desc:    "We train workers for the harvest and carefully develop their gifts and talents.",
     nav:     "Navigation",
     contact: "Contact",
     copy:    "All rights reserved.",

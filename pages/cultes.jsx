@@ -66,7 +66,7 @@ export default function Cultes() {
         }}>
         <div className="absolute inset-0 bg-black/55" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
+          <p style={{color:"#980000"}}className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
           <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider"
             style={{ whiteSpace: "pre-line" }}>
             {t.titre}
@@ -79,7 +79,7 @@ export default function Cultes() {
         {Object.entries(parJour).map(([jour, items]) => (
           <div key={jour}>
             <div className="flex items-center gap-6 mb-6">
-              <h2 className="font-display text-3xl text-ink tracking-wider">
+              <h2 style={{color:"#980000"}}className="font-display text-3xl text-ink tracking-wider">
                 {t.jours[jour]?.toUpperCase() || jour.toUpperCase()}
               </h2>
               <div className="flex-1 h-px bg-gray-200" />

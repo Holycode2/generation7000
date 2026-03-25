@@ -53,7 +53,7 @@ export default function LeaderPage({ leader, locale }) {
       {/* Retour */}
       <div className="max-w-5xl mx-auto px-6 pt-10">
         <Link href="/leaders"
-          className="font-body text-gray-400 hover:text-ink text-xs tracking-widest uppercase transition-colors">
+          style={{color:"#980000"}}className="font-body text-gray-400 hover:text-ink text-xs tracking-widest uppercase transition-colors">
           {t.retour}
         </Link>
       </div>
@@ -78,7 +78,7 @@ export default function LeaderPage({ leader, locale }) {
 
           {/* Infos */}
           <div className="flex-1">
-            <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{role}</p>
+            <p style={{color:"#980000"}} className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{role}</p>
             <h1 className="font-display text-4xl md:text-6xl text-ink tracking-wider mb-6">
               {nom.toUpperCase()}
             </h1>
@@ -89,7 +89,7 @@ export default function LeaderPage({ leader, locale }) {
               <div className="flex flex-wrap gap-3 mt-6">
                 {Object.entries(leader.reseaux).map(([reseau, url]) => (
                   <a key={reseau} href={url} target="_blank" rel="noopener noreferrer"
-                    className="border border-gray-200 text-gray-500 hover:border-ink hover:text-ink font-body text-xs tracking-widest uppercase px-4 py-2 transition-all">
+                    style={{color:"#980000"}}className="border border-gray-200 text-gray-500 hover:border-ink hover:text-ink font-body text-xs tracking-widest uppercase px-4 py-2 transition-all">
                     {reseau.charAt(0).toUpperCase() + reseau.slice(1)}
                   </a>
                 ))}

@@ -72,7 +72,7 @@ export default function Contact() {
       {/* En-tête */}
       <section className="py-28 px-6 border-b border-gray-100">
         <div className="max-w-4xl mx-auto">
-          <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
+          <p className="font-extra text-gray-400 text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
           <h1 className="font-display text-6xl md:text-8xl text-ink tracking-wider">{t.titre}</h1>
         </div>
       </section>
@@ -142,7 +142,7 @@ export default function Contact() {
               </div>
 
               <button type="submit"
-                className="w-full bg-ink text-white font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-ink-light transition-all">
+                className="w-full bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-ink-light transition-all">
                 {t.envoyer}
               </button>
 

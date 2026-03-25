@@ -41,7 +41,7 @@ export default function Medias() {
       {/* En-tête */}
       <section className="py-28 px-6 border-b border-gray-100">
         <div className="max-w-4xl mx-auto">
-          <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
+          <p style={{color:"#980000"}}className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
           <h1 className="font-display text-6xl md:text-8xl text-ink tracking-wider"
             style={{ whiteSpace: "pre-line" }}>
             {t.titre}
@@ -57,7 +57,7 @@ export default function Medias() {
               <div className="w-12 h-12 bg-ink text-white flex items-center justify-center">
                 <Icon />
               </div>
-              <h2 className="font-display text-3xl text-ink tracking-wider">{titre.toUpperCase()}</h2>
+              <h2 style={{color:"#980000"}} className="font-display text-3xl text-ink tracking-wider">{titre.toUpperCase()}</h2>
               <div className="flex-1 h-px bg-gray-100" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

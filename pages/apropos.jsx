@@ -40,7 +40,7 @@ export default function Apropos() {
     <Layout title={t.titre} description="Découvrez la vision, la mission et les valeurs de Génération 7000.">
 
       {/* En-tête avec photo de fond */}
-      <section className="py-28 px-6 border-b border-gray-100 relative"
+      <section className="py-28 px-6 border-b border-[#980000]-100 relative"
         style={{
           backgroundImage:    "url('/images/vision.jpg')",
           backgroundSize:     "cover",
