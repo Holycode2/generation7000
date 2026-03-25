@@ -8,12 +8,12 @@ module.exports = {
     extend: {
       // ── PALETTE NOIR & BLANC MODERNE ────────────────────
       colors: {
-        ink:   { DEFAULT: "#0D0D0D", light: "#1F1F1F", soft: "#3A3A3A" },
+        ink:   { DEFAULT: "#011224ff", light: "#1F1F1F", soft: "#3A3A3A" },
         ash:   { DEFAULT: "#F7F7F7", dark: "#EEEEEE", deeper: "#E0E0E0" },
-        accent:{ DEFAULT: "#0D0D0D", hover: "#333333" },
+        accent:{ DEFAULT: "#0D0D0D", hover: "#980000" },
       },
       fontFamily: {
-        display: ["'Bebas Neue'", "sans-serif"],   // titres forts, impactants
+        display: ["'Bebas Neue'", "Montserrat Géometrique"],   // titres forts, impactants
         body:    ["'DM Sans'", "sans-serif"],       // corps lisible et moderne
         accent:  ["'Playfair Display'", "serif"],   // citations élégantes
       },

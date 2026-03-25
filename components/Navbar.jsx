@@ -57,14 +57,14 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <button onClick={() => switchLocale('fr')}
               className={`font-body text-xs tracking-widest uppercase transition-colors ${
-                locale === 'fr' ? 'text-white font-bold' : 'text-white/40 hover:text-white/70'
+                locale === 'fr' ? 'text-[#980000] font-bold' : 'text-white/40 hover:text-white/70'
               }`}>
               FR
             </button>
             <span className="text-white/20">|</span>
             <button onClick={() => switchLocale('en')}
               className={`font-body text-xs tracking-widest uppercase transition-colors ${
-                locale === 'en' ? 'text-white font-bold' : 'text-white/40 hover:text-white/70'
+                locale === 'en' ? 'text-[#980000] font-bold' : 'text-white/40 hover:text-white/70'
               }`}>
               EN
             </button>
@@ -72,7 +72,7 @@ export default function Navbar() {
 
           {/* Bouton rejoindre */}
           <Link href="/contact"
-            className="bg-white text-ink font-body text-xs tracking-widest uppercase px-5 py-2.5 hover:bg-gray-100 transition-all">
+            className="bg-[#980000] text-white font-body text-xs tracking-widest uppercase px-5 py-2.5 hover:bg-gray-100 transition-all">
             {t.nav.rejoindre}
           </Link>
         </div>
@@ -81,7 +81,7 @@ export default function Navbar() {
         <div className="md:hidden flex items-center gap-3">
           {/* Langue mobile */}
           <button onClick={() => switchLocale(locale === 'fr' ? 'en' : 'fr')}
-            className="text-white/60 font-body text-xs tracking-widest uppercase border border-white/20 px-2 py-1">
+            className="text-white/60 font-bold text-xs tracking-widest uppercase border border-white/40 px-2 py-1">
             {locale === 'fr' ? 'EN' : 'FR'}
           </button>
 
@@ -111,7 +111,7 @@ export default function Navbar() {
             ))}
             <li>
               <Link href="/contact" onClick={() => setMenuOpen(false)}
-                className="inline-block bg-white text-ink text-xs tracking-widest uppercase px-5 py-2.5 mt-2">
+                className="inline-block bg-[#980000] text-white text-xs tracking-widest uppercase px-5 py-2.5 mt-2">
                 {t.nav.rejoindre}
               </Link>
             </li>

@@ -92,7 +92,7 @@ export default function Evenements() {
                     href={evt.lienInscription}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block bg-ink text-white font-body font-semibold text-xs tracking-widest uppercase px-6 py-3 hover:bg-ink-light transition-all">
+                    className="inline-block bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-6 py-3 hover:bg-ink-light transition-all">
                     {t.suivre}
                   </a>
                 )}

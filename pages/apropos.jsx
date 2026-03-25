@@ -8,24 +8,24 @@ const TEXTES = {
     tag:          "Qui sommes-nous",
     titre:        "VISION",
     presentation: `La Génération 7000 est une structure dont la mission est de vous inviter à redécouvrir l'Évangile de Christ et à comprendre son Royaume.\nNous vous accompagnons pour bâtir une vie équilibrée qui nourrit votre éveil spirituel au quotidien.`,
-    mission:      `"Nous formons des ouvriers pour la moisson et développons leurs talents avec soin".`,
-    valeursTag:   "Ce qui nous définit",
-    valeursTitre: "NOS VALEURS",
+    mission:      `Nous formons des ouvriers pour la moisson et développons leurs talents avec soin.`,
+    valeursTag:   "",
+    valeursTitre: "",
     valeurs: [
-      { titre: "L'AMOUR ET L'HOSPITALITÉ", texte: "Servir avec amour, accueillir avec cœur. (Galates 5:13)" },
+      { titre: ""},
     ],
     verset:    "« Mais je laisserai en Israël sept mille hommes, tous ceux qui n'ont point fléchi les genoux devant Baal, et dont la bouche ne l'a point baisé. »",
     versetRef: "1 Rois 19:18",
   },
   en: {
-    tag:          "Who we are",
+    tag:          "About Us",
     titre:        "VISION",
     presentation: `Generation 7000 is a ministry whose mission is to invite you to rediscover the Gospel of Christ and understand His Kingdom.\nWe walk alongside you to build a balanced life that nourishes your spiritual awakening every day.`,
-    mission:      `"We train workers for the harvest and carefully develop their gifts and talents."`,
-    valeursTag:   "What defines us",
-    valeursTitre: "OUR VALUES",
+    mission:      `We train workers for the harvest and carefully develop their gifts and talents.`,
+    valeursTag:   "",
+    valeursTitre: "",
     valeurs: [
-      { titre: "LOVE AND HOSPITALITY", texte: "Serving with love, welcoming with heart. (Galatians 5:13)" },
+      { },
     ],
     verset:    "\"Yet I have left me seven thousand in Israel, all the knees which have not bowed unto Baal, and every mouth which hath not kissed him.\"",
     versetRef: "1 Kings 19:18",
@@ -48,7 +48,7 @@ export default function Apropos() {
         }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
+          <p style={{color:"#980000"}}className="font-bold text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
           <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider">{t.titre}</h1>
         </div>
       </section>
@@ -56,7 +56,7 @@ export default function Apropos() {
       {/* Présentation */}
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto">
-          <p className="font-body text-gray-600 text-xl leading-relaxed" style={{ whiteSpace: "pre-line" }}>
+          <p className="font-body text-gray-600 text- leading-relaxed" style={{ whiteSpace: "pre-line" }}>
             {t.presentation}
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function Apropos() {
       <section className="py-24 px-6 bg-ash">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
           <div>
-            <p className="font-body text-black-600 leading-relaxed">{t.mission}</p>
+            <p className="font-bold text-black-600 leading-relaxed">{t.mission}</p>
           </div>
           <div />
         </div>

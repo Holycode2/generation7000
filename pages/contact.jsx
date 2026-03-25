@@ -82,7 +82,7 @@ export default function Contact() {
 
           {/* Infos de contact */}
           <div>
-            <h2 className="font-display text-3xl text-ink tracking-wider mb-10">{t.rejoindre}</h2>
+            <h2 style={{color:"#980000"}}className="font-display text-3xl text-ink tracking-wider mb-10">{t.rejoindre}</h2>
             <div className="space-y-8">
               {[
                 { icon: "✉", label: "Email",    val: email,     href: `mailto:${email}` },

@@ -80,16 +80,16 @@ export default function Home() {
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto">
-          <p className="animate-fade-in font-body text-white tracking-[0.5em] uppercase mb-8 text-xs">{t.tag}</p>
+          <p style= {{color:"#FFFFFF"}}className="animate-fade-in font-body text-white tracking-[0.5em] uppercase mb-8 text-xs">{t.tag}</p>
           <h1 className="animate-fade-in-up font-display text-white leading-none tracking-wider mb-0"
-            style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}>{t.titre1}</h1>
+            style={{ fontSize: "clamp(7rem, 16vw, 9rem)" }}>{t.titre1}</h1>
           <h1 className="animate-fade-in-up font-display text-white leading-none tracking-wider mb-8"
-            style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}>{t.titre2}</h1>
+          style={{color: "#980000", fontSize: "clamp(4rem, 10vw, 7rem)" }}>{t.titre2}</h1>
           <div className="w-12 h-px bg-white/30 mx-auto mb-8" />
           <p className="animate-fade-in-up-delay font-accent italic text-gray-300 text-xl md:text-2xl mb-12">{t.slogan}</p>
           <div className="animate-fade-in-up-delay-2 flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/evenements"
-              className="bg-white text-ink font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-gray-100 transition-all duration-300">
+              className="bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-gray-100 transition-all duration-300">
               {t.btnEvents}
             </Link>
             <Link href="/apropos"
@@ -100,7 +100,7 @@ export default function Home() {
         </div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-          <span className="text-white text-xs tracking-widest uppercase font-body">{t.scroll}</span>
+          <span style={{color:"#ffffff"}}className="text-white text-xs tracking-widest uppercase font-body">{t.scroll}</span>
           <div className="w-px h-10 bg-gradient-to-b from-white to-transparent" />
         </div>
       </section>
@@ -109,11 +109,11 @@ export default function Home() {
       <section className="py-28 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-5">{t.visionTag}</p>
-          <h2 className="font-display text-5xl md:text-6xl text-ink tracking-wider mb-8">{t.visionTitre}</h2>
+          <h2 style={{ color: "#980000"}}className="font-display text-5xl">{t.visionTitre}</h2>
           <div className="divider-ink" />
-          <p className="font-body text-gray-600 text-lg leading-relaxed mb-10">{t.visionTexte}</p>
+          <p className="font-body text-gray-600 text-black leading-relaxed mb-10">{t.visionTexte}</p>
           <Link href="/apropos"
-            className="font-body text-sm tracking-widest uppercase text-ink border-b border-ink pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors">
+            style={{color: "#980000"}}className="font-body text-sm tracking-widest uppercase text-ink border-b border-ink pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-colors">
             {t.visionLien}
           </Link>
         </div>
@@ -125,10 +125,10 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-4">
             <div>
               <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-3">{t.eventsTag}</p>
-              <h2 className="font-display text-5xl md:text-6xl text-ink tracking-wider">{t.eventsTitre}</h2>
+              <h2  style= {{ color:"#980000"}}className="font-display text-5xl md:text-6xl text-ink tracking-wider">{t.eventsTitre}</h2>
             </div>
             <Link href="/evenements"
-              className="font-body text-xs tracking-widest uppercase text-gray-500 hover:text-ink border-b border-gray-300 hover:border-ink pb-0.5 transition-colors self-start md:self-auto">
+              style={{color: "#980000"}}className="font-body text-xs tracking-widest uppercase text-gray-500 hover:text-ink border-b border-gray-300 hover:border-ink pb-0.5 transition-colors self-start md:self-auto">
               {t.eventsLien}
             </Link>
           </div>
@@ -204,7 +204,7 @@ export default function Home() {
                 {leaderNom.toUpperCase()}
               </h2>
               {/* ← RÔLE TRADUIT */}
-              <p className="font-accent italic text-gray-500 text-lg mb-6">{leaderRole}</p>
+              <p className="font-accent italic text-gray-500 text-black mb-6">{leaderRole}</p>
               <div className="divider-left" />
               {/* ← BIO TRADUITE */}
               <p className="text-gray-600 leading-relaxed mb-8 max-w-lg">
@@ -212,7 +212,7 @@ export default function Home() {
               </p>
               <div className="flex gap-4 flex-wrap">
                 <Link href={`/leaders/${leaderVedette.slug}`}
-                  className="bg-ink text-white font-body text-xs tracking-widest uppercase px-6 py-3 hover:bg-ink-light transition-all">
+                  className="bg-[#980000] text-white font-body text-xs tracking-widest uppercase px-6 py-3 hover:bg-ink-light transition-all">
                   {t.leaderBio}
                 </Link>
                 <Link href="/leaders"

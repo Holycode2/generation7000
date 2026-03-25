@@ -8,7 +8,8 @@ import { useRouter } from "next/router";
 const TEXTES = {
   fr: {
     tag:          "Rejoignez-nous",
-    titre:        "PROGRAMME\nDES CULTES",
+    titre1:        "PROGRAMME ",
+    titre2 :       "DES CULTES",
     firstVisit:   "PREMIÈRE VISITE ?",
     firstText:    "Vous êtes les bienvenus ! Venez tel que vous êtes.",
     btnContact:   "Nous contacter",
@@ -25,7 +26,8 @@ const TEXTES = {
   },
   en: {
     tag:          "Join us",
-    titre:        "SERVICE\nSCHEDULE",
+    titre1:        "SERVICE",
+    titre2:         "SCHEDULE",
     firstVisit:   "FIRST VISIT?",
     firstText:    "You are welcome! Come as you are.",
     btnContact:   "Contact us",
@@ -55,22 +57,27 @@ export default function Cultes() {
   }, {});
 
   return (
-    <Layout title={t.titre.replace("\n", " ")} description="Horaires des cultes de Génération 7000.">
+    <Layout title={t.titre1.replace("\n", " ")} description="Horaires des cultes de Génération 7000.">
 
       {/* En-tête avec photo de fond */}
       <section className="py-28 px-6 relative"
         style={{
-          backgroundImage:    "url('/images/culte.jpg')",
+          backgroundImage:    "url('/images/heroe2.png')",
           backgroundSize:     "cover",
           backgroundPosition: "center",
         }}>
         <div className="absolute inset-0 bg-black/55" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
+          <p style={{color:"#980000"}}className="font-bold text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
           <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider"
             style={{ whiteSpace: "pre-line" }}>
-            {t.titre}
+            {t.titre1}
           </h1>
+          <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider"
+            style={{ color:"#980000", whiteSpace: "pre-line" }}>
+            {t.titre2}
+            </h1>
+
         </div>
       </section>
 
