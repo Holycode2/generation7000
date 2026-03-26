@@ -13,7 +13,7 @@ export default function Footer() {
 
         <div>
           <h3 className="font-display text-2xl tracking-wider mb-2">{nom}</h3>
-          <p className="font-accent italic text-gray-400 text-sm mb-4">{slogan}</p>
+          <p className="font-accent italic text-gray-400 text-sm mb-4">{t.footer.slogan}</p>
           <p className="text-gray-500 text-sm leading-relaxed">{t.footer.desc}</p>
         </div>
 

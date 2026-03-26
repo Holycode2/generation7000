@@ -99,6 +99,7 @@ const en = {
     confirm:    "✓ Your mail client has opened!",
   },
   footer: {
+    slogan: "What the Spirit does is perfect",
     desc:    "We train workers for the harvest and carefully develop their gifts and talents.",
     nav:     "Navigation",
     contact: "Contact",

@@ -7,7 +7,7 @@ const TEXTES = {
   fr: {
     tag:          "Qui sommes-nous",
     titre:        "VISION",
-    presentation: `La Génération 7000 est une structure dont la mission est de vous inviter à redécouvrir l'Évangile de Christ et à comprendre son Royaume.\nNous vous accompagnons pour bâtir une vie équilibrée qui nourrit votre éveil spirituel au quotidien.`,
+    presentation: `La Génération 7000 est une structure dont la mission est de redécouvrir l'Évangile de Christ et à comprendre son Royaume.\nNous vous accompagnons pour bâtir une vie équilibrée qui nourrit votre éveil spirituel au quotidien.`,
     mission:      `Nous formons des ouvriers pour la moisson et développons leurs talents avec soin.`,
     valeursTag:   "",
     valeursTitre: "",
@@ -20,7 +20,7 @@ const TEXTES = {
   en: {
     tag:          "About Us",
     titre:        "VISION",
-    presentation: `Generation 7000 is a ministry whose mission is to invite you to rediscover the Gospel of Christ and understand His Kingdom.\nWe walk alongside you to build a balanced life that nourishes your spiritual awakening every day.`,
+    presentation: "Generation 7000 is a structure whose mission is to rediscover the Gospel of Christ and understand His Kingdom. We support you in building a balanced life that nurtures your spiritual awakening on a daily basis.",
     mission:      `We train workers for the harvest and carefully develop their gifts and talents.`,
     valeursTag:   "",
     valeursTitre: "",

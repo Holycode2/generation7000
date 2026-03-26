@@ -96,6 +96,7 @@ const fr = {
     confirm:    "✓ Votre client mail s'est ouvert !",
   },
   footer: {
+    slogan:       "Ce que l’esprit fait est parfait.",
     desc:    "Nous formons des ouvriers pour la moisson et développons leurs talents avec soin.",
     nav:     "Navigation",
     contact: "Contact",
