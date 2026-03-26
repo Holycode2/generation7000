@@ -12,7 +12,7 @@ const fr = {
   },
   hero: {
     tag:          "1 Rois 19:18",
-    slogan:       "Une génération mise à part",
+    slogan:       "Ce que l’esprit fait est parfait.",
     btnEvents:    "Voir les événements",
     btnVision:    "Notre vision",
     scrollLabel:  "Défiler",

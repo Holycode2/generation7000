@@ -12,7 +12,7 @@ const en = {
   },
   hero: {
     tag:          "1 Kings 19:18",
-    slogan:       "A generation set apart",
+    slogan:       "What the Spirit does is perfect.",
     btnEvents:    "See events",
     btnVision:    "Our vision",
     scrollLabel:  "Scroll",

@@ -2,18 +2,19 @@
 const leaders = [
   {
     slug: "berger-ben",
-    nom:     "Pst. Ben Muna",
-    nom_en:  "Pst. Ben Muna",
+    nom:     "Ben Muna",
+    nom_en:  "Ben Muna",
     role:    "Berger Visionnaire",
     role_en: "Visionary Pastor",
     niveau: 1,
-    photo: "/images/ben-muna.jpg",
+    photo: "/images/ben.jpg",
     bio:    "Visionnaire et pasteur de Génération 7000.",
     bio_en: "Visionary and pastor of Generation 7000.",
     versets:    [""],
     versets_en: [""],
     reseaux: {
       instagram: "https://www.instagram.com/0.benmuna?igsh=NHVvN2U4dW05M2hm",
+      youtube: "https://youtube.com/@benmuna0?si=srs9RPbmz51TDEY0",
     },
   },
   {
@@ -31,6 +32,7 @@ const leaders = [
     reseaux: {
       instagram: "https://www.instagram.com/daniel_mbal?igsh=MTBkMGltOTQwbjQ1&utm_source=qr",
       facebook:  "https://www.facebook.com/share/1AixikCaGB/?mibextid=wwXIfr",
+      youtube: "https://youtube.com/@danielmbal-pv2je?si=mpyrT7PcHgDt5PSF"
     },
   },
   {

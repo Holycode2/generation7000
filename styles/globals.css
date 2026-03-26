@@ -18,7 +18,6 @@ body {
   /* Séparateur fin noir */
   .divider-ink {
     @apply w-12 h-px bg-ink mx-auto my-8;
-    color: "#980000"
   }
   /* Séparateur aligné gauche */
   .divider-left {

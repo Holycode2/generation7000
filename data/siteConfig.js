@@ -4,7 +4,7 @@
 
 const siteConfig = {
   nom: "Génération 7000",
-  slogan: "Une génération mise à part",
+  slogan: "What the Spirit does is perfect.",
   description: "La Génération 7000 est une structure dont la mission est de vous inviter à redécouvrir l'Évangile de Christ et à comprendre son Royaume.",
   email: "generation7kministries@gmail.com",            // ← change ici
   telephone: "+7(991)-232-01-35",                  // ← change ici
