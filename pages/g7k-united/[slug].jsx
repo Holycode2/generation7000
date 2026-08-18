@@ -77,7 +77,7 @@ export default function PolePage({ pole, autres, locale }) {
     >
 
       {/* Retour */}
-      <div className="max-w-5xl mx-auto px-6 pt-10">
+      <div className="max-w-5xl mx-auto px-6 pt-28">
         <Link href="/g7k-united"
           className="font-body text-gray-400 hover:text-ink text-xs tracking-widest uppercase transition-colors">
           {t.retour}

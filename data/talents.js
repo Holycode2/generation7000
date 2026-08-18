@@ -47,8 +47,8 @@ const talents = [{
                 role: "chanteur, Rappeur & Musicien",
                 role_en: "Singer, Rapper & Musician",
                 photo: "/images/daniel.jpg", // [Photo à remplacer]
-                bio: "[Texte à remplacer] ",
-                bio_en: "[Text to replace]",
+                bio: "Daniel Mbal est un artiste originaire de Kolwezi, en République démocratique du Congo. Il évolue dans un univers musical entre pop. Se considérant avant tout comme un serviteur du Royaume, il cherche à mettre tout ce qu’il est et tout ce qu’il sait faire au service de Dieu. À travers sa musique, il partage simplement ce qu’il vit, ce qu’il croit et ce que Dieu met dans son cœur.",
+                bio_en: "Daniel Mbal is an artist from Kolwezi, Democratic Republic of the Congo. His music moves between pop. Above all, he sees himself as a servant of the Kingdom, seeking to use everything he is and everything he can do to serve God. Through his music, he simply shares what he lives, what he believes, and what God places on his heart.",
                 reseaux: {
                     instagram: "https://www.instagram.com/daniel_mbal/",
                     youtube: "https://youtube.com/@danielmbal?si=vDu5Gk6Qm0JWBKBT",
@@ -68,7 +68,7 @@ const talents = [{
                 },
             },
             {
-                nom: "[ l'artiste 3]",
+                nom: "[]",
                 role: "artiste",
                 role_en: "Artist",
                 photo: "/images/leader-placeholder.jpg", // [Photo à remplacer]

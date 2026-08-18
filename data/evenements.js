@@ -49,7 +49,7 @@ const evenements = [{
         theme: "L'esprit de la Mission",
         theme_en: "The Spirit of Mission",
 
-        date: "chaque Jeudi et Vendredi", // ← format AAAA-MM-JJ avec des tirets
+        date: "2026-07-30", // ← format AAAA-MM-JJ avec des tirets
         heure: "21h00",
 
         lieu: "Sur Google Meet",
@@ -94,9 +94,9 @@ const evenements = [{
                     role_en: "Geust",
                     photo: "/images/David kataly.JPG",
                 },
-                resume: "",
+                resume: "Resumé",
                 resume_en: "",
-                verset: "",
+                verset: " Verset : ",
                 verset_en: "",
                 photos: [
                     // [Photos à remplacer] — récap en images de cette soirée
@@ -107,15 +107,15 @@ const evenements = [{
                 lienReplay: "",
             },
             {
-                date: "2026-08-13",
+                date: "2026-08-07",
                 heure: "21h00",
                 theme: "[Thème à remplacer]",
                 theme_en: "[Theme to replace]",
                 intervenant: {
-                    nom: "[Nom de l'intervenant]",
-                    role: "[Rôle]",
-                    role_en: "[Role]",
-                    photo: "/images/leader-placeholder.jpg",
+                    nom: "Ben Muna",
+                    role: "Berger Visionnaire",
+                    role_en: "Visionary Pastor",
+                    photo: "/images/ben.jpg",
                 },
                 resume: " Résumé de l'enseignement.",
                 resume_en: "Summary of the teaching.",
@@ -127,18 +127,18 @@ const evenements = [{
             {
                 date: "2026-08-27",
                 heure: "21h00",
-                theme: "[Thème à remplacer]",
-                theme_en: "[Theme to replace]",
+                theme: "Le Reveil à la manière de la chambre Haute ",
+                theme_en: "The Awakening in the manner of the Upper Room",
                 intervenant: {
-                    nom: "[Nom de l'intervenant]",
-                    role: "[Rôle]",
-                    role_en: "[Role]",
+                    nom: "Brger Charly Gloire",
+                    role: "Invité",
+                    role_en: "Geust",
                     photo: "/images/leader-placeholder.jpg",
                 },
                 resume: "[Texte à remplacer] Résumé de l'enseignement.",
                 resume_en: "[Text to replace] Summary of the teaching.",
-                verset: "",
-                verset_en: "",
+                verset: "Verset : Acte 1:8, Acte 2",
+                verset_en: "Verses Act 1:8, Act 2",
                 photos: [],
                 lienReplay: "",
             },

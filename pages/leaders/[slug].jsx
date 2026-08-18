@@ -51,7 +51,7 @@ export default function LeaderPage({ leader, locale }) {
     <Layout title={nom} description={`${nom} — ${role}`}>
 
       {/* Retour */}
-      <div className="max-w-5xl mx-auto px-6 pt-10">
+      <div className="max-w-5xl mx-auto px-6 pt-28">
         <Link href="/leaders"
           style={{color:"#980000"}}className="font-body text-gray-400 hover:text-ink text-xs tracking-widest uppercase transition-colors">
           {t.retour}

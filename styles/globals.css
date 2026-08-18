@@ -8,6 +8,9 @@
 /* ── BASE ─────────────────────────────────────────── */
 html {
     scroll-behavior: smooth;
+    /* La navbar flotte au-dessus du contenu : on réserve sa hauteur pour que
+       les ancres (#section) n'atterrissent pas derrière elle. */
+    scroll-padding-top: 6rem;
 }
 
 body {
