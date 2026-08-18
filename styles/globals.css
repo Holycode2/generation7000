@@ -6,59 +6,52 @@
 @tailwind utilities;
 
 /* ── BASE ─────────────────────────────────────────── */
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-  @apply bg-white text-ink font-body;
-  -webkit-font-smoothing: antialiased;
+    @apply bg-white text-ink font-body;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* ── UTILITAIRES ──────────────────────────────────── */
 @layer utilities {
-  /* Séparateur fin noir */
-  .divider-ink {
-    @apply w-12 h-px bg-ink mx-auto my-8;
-  }
-  /* Séparateur aligné gauche */
-  .divider-left {
-    @apply w-12 h-px bg-ink my-6;
-  }
-  /* Ombre douce pour les cartes */
-  .card-shadow {
-    box-shadow: 0 2px 20px rgba(0,0,0,0.07);
-  }
-  .card-shadow-hover {
-    box-shadow: 0 8px 40px rgba(0,0,0,0.13);
-  }
+
+    /* Séparateur fin noir */
+    .divider-ink {
+        @apply w-12 h-px bg-ink mx-auto my-8;
+    }
+
+    /* Séparateur aligné gauche */
+    .divider-left {
+        @apply w-12 h-px bg-ink my-6;
+    }
+
+    /* Ombre douce pour les cartes */
+    .card-shadow {
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.07);
+    }
+
+    .card-shadow-hover {
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.13);
+    }
 }
 
 /* ── ANIMATIONS ───────────────────────────────────── */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+
+@keyframes scrollPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.7s ease forwards;
-}
-.animate-fade-in-up-delay {
-  animation: fadeInUp 0.7s ease 0.25s forwards;
-  opacity: 0;
-}
-.animate-fade-in-up-delay-2 {
-  animation: fadeInUp 0.7s ease 0.5s forwards;
-  opacity: 0;
-}
-.animate-fade-in {
-  animation: fadeIn 1s ease forwards;
+.scroll-animation {
+    animation: scrollPulse 2s infinite ease-in-out;
 }
