@@ -7,6 +7,7 @@ import { aVenir, passes } from "../data/evenements";
 import leaders from "../data/leaders";
 import siteConfig from "../data/siteConfig";
 import { useRouter } from "next/router";
+import { useTranslation } from "../hooks/useTranslation";
 
 const ACCENT = "#980000";
 
@@ -43,6 +44,7 @@ const TEXTES = {
     visionTag:   "Our DNA",
     visionTitre: "THE VISION",
     visionTexte: "Generation 7000 is a structure whose mission is to rediscover the Gospel of Christ and understand His Kingdom. We support you in building a balanced life that nurtures your spiritual awakening on a daily basis.",
+    visionLien:  "Learn more →",
     eventsTag:   "Coming up",
     eventsTitre: "EVENTS",
     eventsLien:  "All events →",
@@ -69,6 +71,7 @@ function Eyebrow({ children, tone = "light" }) {
 
 export default function Home() {
   const { locale } = useRouter();
+  const { t: tr } = useTranslation();
   const t = TEXTES[locale] || TEXTES.fr;
 
   // On met en avant les événements à venir ; s'il n'y en a pas, les plus récents.
@@ -82,7 +85,10 @@ export default function Home() {
   const leaderBio  = locale === "en" && leaderVedette.bio_en  ? leaderVedette.bio_en  : leaderVedette.bio;
 
   return (
-    <Layout title="Accueil" description={siteConfig.description}>
+    <Layout
+      title={tr.meta.home}
+      description={locale === "en" ? siteConfig.description_en : siteConfig.description}
+    >
 
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6">
@@ -240,33 +246,34 @@ export default function Home() {
               <Link
                 key={evt.id}
                 href={`/evenements/${evt.slug}`}
-                className="bg-white p-8 pt-7 card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden block"
+                className="bg-white card-shadow hover:card-shadow-hover transition-all duration-300 hover:-translate-y-1 group overflow-hidden block"
               >
-                <div
-                  className="absolute top-0 left-0 right-0 h-1 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"
-                  style={{ backgroundColor: ACCENT }}
-                />
-
-                <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-4">
-                  {new Date(evt.date).toLocaleDateString(locale === "en" ? "en-US" : "fr-FR", {
-                    day: "numeric", month: "long", year: "numeric",
-                  })}
-                </p>
-
-                {/* ← TITRE TRADUIT */}
-                <h3 className="font-display text-2xl text-ink tracking-wide mb-4 leading-tight group-hover:text-gray-700 transition-colors">
-                  {locale === "en" && evt.titre_en ? evt.titre_en : evt.titre}
-                </h3>
-
-                {/* ← DESCRIPTION TRADUITE */}
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                  {(locale === "en" && evt.description_en ? evt.description_en : evt.description).slice(0, 90)}…
-                </p>
-
-                {/* ← LIEU TRADUIT */}
-                <div className="flex items-center gap-2 text-gray-400 text-xs">
-                  <span>📍</span>
-                  <span>{locale === "en" && evt.lieu_en ? evt.lieu_en : evt.lieu}</span>
+                <div className="relative h-44 bg-ink overflow-hidden">
+                  {evt.image && (
+                    <img
+                      src={evt.image}
+                      alt=""
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <p className="absolute bottom-3 left-4 font-body text-white/80 text-[10px] tracking-[0.25em] uppercase">
+                    {new Date(evt.date).toLocaleDateString(locale === "en" ? "en-US" : "fr-FR", {
+                      day: "numeric", month: "short", year: "numeric",
+                    })}
+                  </p>
+                </div>
+                <div className="p-7">
+                  <h3 className="font-display text-2xl text-ink tracking-wide mb-3 leading-tight group-hover:text-gray-700 transition-colors">
+                    {locale === "en" && evt.titre_en ? evt.titre_en : evt.titre}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-2">
+                    {locale === "en" && evt.description_en ? evt.description_en : evt.description}
+                  </p>
+                  <p className="font-body text-gray-400 text-xs inline-flex items-center gap-1.5">
+                    <span>📍</span>
+                    {locale === "en" && evt.lieu_en ? evt.lieu_en : evt.lieu}
+                  </p>
                 </div>
               </Link>
             ))}

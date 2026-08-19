@@ -21,9 +21,13 @@
 //                  [{ heure, titre, titre_en, description, description_en }]
 //   sessions       (optionnel) les rendez-vous successifs d'un événement qui
 //                  s'étale dans le temps (un trimestre, une série d'enseignements).
-//                  Une session = une date, un thème, un intervenant, un récap :
+//                  Une session = un intervenant, sur deux soirs (jeudi et vendredi) :
 //                  [{
-//                     date, heure,
+//                     date, heure,                 ← 1er soir (jeudi), conservé pour compatibilité
+//                     jours: [                     ← les deux soirs
+//                       { date, heure, jour: "Jeudi" },
+//                       { date, heure, jour: "Vendredi" },
+//                     ],
 //                     theme, theme_en,
 //                     intervenant: { nom, role, role_en, photo },
 //                     resume, resume_en,       ← récap de l'enseignement
@@ -58,8 +62,8 @@ const evenements = [{
         image: "/images/abide.png",
         statut: "encours",
 
-        description: "Thème : L'esprit de la Mission.  Acte 1:8",
-        description_en: "Theme: The Spirit of Mission. Act 1:8 ",
+        description: "Thème : L'esprit de la Mission. Actes 1:8. Chaque intervenant enseigne deux soirs : jeudi et vendredi, à 21h00.",
+        description_en: "Theme: The Spirit of Mission. Acts 1:8. Each speaker teaches on two evenings: Thursday and Friday, at 9:00 PM.",
         programme: [
             // Déroulé type d'une soirée du trimestre.
             {
@@ -71,8 +75,8 @@ const evenements = [{
                 heure: "21h10",
                 titre: "Enseignement",
                 titre_en: "Teaching",
-                description: "[Texte à remplacer]",
-                description_en: "[Text to replace]"
+                description: "",
+                description_en: ""
             },
             {
                 heure: "22h00",
@@ -86,54 +90,124 @@ const evenements = [{
         sessions: [{
                 date: "2026-07-30",
                 heure: "21h00",
+                jours: [{
+                        date: "2026-07-30",
+                        heure: "21h00",
+                        jour: "Jeudi",
+                        jour_en: "Thursday"
+                    },
+                    {
+                        date: "2026-07-31",
+                        heure: "21h00",
+                        jour: "Vendredi",
+                        jour_en: "Friday"
+                    },
+                ],
                 theme: "Le Saint Esprit & La bible",
                 theme_en: "The Holy spirit & The Bible ",
                 intervenant: {
                     nom: "Berger David Katalay",
                     role: "Invité",
-                    role_en: "Geust",
-                    photo: "/images/David kataly.JPG",
+                    role_en: "Guest",
+                    photo: "/images/D.JPG",
                 },
                 resume: "Resumé",
                 resume_en: "",
                 verset: " Verset : ",
                 verset_en: "",
                 photos: [
-                    // [Photos à remplacer] — récap en images de cette soirée
-                    "/images/abide.png",
-                    "/images/abide1.png",
-                    "/images/IMG_4731.png",
+
                 ],
                 lienReplay: "",
             },
             {
-                date: "2026-08-07",
+                date: "2026-08-06",
                 heure: "21h00",
-                theme: "[Thème à remplacer]",
-                theme_en: "[Theme to replace]",
+                jours: [{
+                        date: "2026-08-06",
+                        heure: "21h00",
+                        jour: "Jeudi",
+                        jour_en: "Thursday"
+                    },
+                    {
+                        date: "2026-08-07",
+                        heure: "21h00",
+                        jour: "Vendredi",
+                        jour_en: "Friday"
+                    },
+                ],
+                theme: [
+                    " Jour 1 : Avant,pendant et après la pentecôte",
+                ],
+
+                theme_en: "Before, during and after Pentecost",
                 intervenant: {
                     nom: "Ben Muna",
                     role: "Berger Visionnaire",
                     role_en: "Visionary Pastor",
                     photo: "/images/ben.jpg",
                 },
-                resume: " Résumé de l'enseignement.",
-                resume_en: "Summary of the teaching.",
+                resume: " ",
+                resume_en: "",
                 verset: "",
                 verset_en: "",
                 photos: [],
                 lienReplay: "",
             },
             {
-                date: "2026-08-27",
+                date: "2026-08-13",
                 heure: "21h00",
+                jours: [{
+                        date: "2026-08-13",
+                        heure: "21h00",
+                        jour: "Jeudi",
+                        jour_en: "Thursday"
+                    },
+                    {
+                        date: "2026-08-14",
+                        heure: "21h00",
+                        jour: "Vendredi",
+                        jour_en: "Friday"
+                    },
+                ],
                 theme: "Le Reveil à la manière de la chambre Haute ",
                 theme_en: "The Awakening in the manner of the Upper Room",
                 intervenant: {
-                    nom: "Brger Charly Gloire",
+                    nom: "Berger Charly Gloire",
                     role: "Invité",
-                    role_en: "Geust",
-                    photo: "/images/leader-placeholder.jpg",
+                    role_en: "Guest",
+                    photo: "/images/c.JPG",
+                },
+                resume: "",
+                resume_en: ".",
+                verset: "Verset : Acte 1:8, Acte 2",
+                verset_en: "Verses Act 1:8, Act 2",
+                photos: [],
+                lienReplay: "",
+            },
+            {
+                date: "2026-08-13",
+                heure: "21h00",
+                jours: [{
+                        date: "2026-08-13",
+                        heure: "21h00",
+                        jour: "Jeudi",
+                        jour_en: "Thursday"
+                    },
+                    {
+                        date: "2026-08-14",
+                        heure: "21h00",
+                        jour: "Vendredi",
+                        jour_en: "Friday"
+                    },
+                ],
+                theme: " ",
+                theme_en: "",
+                intervenant: {
+                    nom: "Ben Muna",
+                    role: "Berger Visionnaire",
+                    role_en: "Visionary Pastor",
+                    photo: "/images/ben.jpg",
                 },
                 resume: "[Texte à remplacer] Résumé de l'enseignement.",
                 resume_en: "[Text to replace] Summary of the teaching.",
@@ -145,10 +219,20 @@ const evenements = [{
         ],
 
         intervenants: [{
+            nom: "Berger David Katalay",
+            role: "Invité",
+            role_en: "Guest",
+            photo: "/images/D.JPG"
+        }, {
             nom: "Ben Muna",
             role: "Berger Visionnaire",
             role_en: "Visionary Pastor",
             photo: "/images/ben.jpg"
+        }, {
+            nom: "Berger Charly Gloire",
+            role: "Invité",
+            role_en: "Guest",
+            photo: "/images/c.JPG"
         }, ],
 
         lienInstagram: "https://www.instagram.com/g7k.global?igsh=MTl1aXpoa2cxMXkwNQ==",
@@ -296,21 +380,94 @@ const evenements = [{
 // ── HELPERS ───────────────────────────────────────────────────────────────
 // Utilisés par les pages : ne pas modifier sauf besoin particulier.
 
-/** Un événement est passé si son statut le dit, sinon si sa date est dépassée. */
-export function estPasse(evt) {
-    if (evt.statut === "passe") return true;
-    if (evt.statut === "a-venir") return false;
-    return new Date(evt.date).getTime() < Date.now();
+const JOUR_MS = 24 * 60 * 60 * 1000;
+
+/** Toutes les dates d'une session (les deux soirs, ou la date unique). */
+export function datesSession(session) {
+    const jours = session ? .jours ? .map((j) => j.date && new Date(j.date).getTime()).filter(Boolean);
+    if (jours ? .length) return jours;
+    const unique = session ? .date && new Date(session.date).getTime();
+    return unique ? [unique] : [];
 }
 
-/** Événements à venir, du plus proche au plus lointain. */
+function datesUtiles(evt) {
+    const dates = (evt.sessions || []).flatMap(datesSession);
+    if (dates.length) return dates;
+    const unique = new Date(evt.date).getTime();
+    return Number.isNaN(unique) ? [] : [unique];
+}
+
+/** Date de fin réelle : dernière session, sinon la date de l'événement. */
+export function dateFin(evt) {
+    const dates = datesUtiles(evt);
+    return dates.length ? Math.max(...dates) : new Date(evt.date).getTime();
+}
+
+export function dateDebut(evt) {
+    const dates = datesUtiles(evt);
+    return dates.length ? Math.min(...dates) : new Date(evt.date).getTime();
+}
+
+/** Une série encore en cours (statut "encours" ou sessions à cheval sur aujourd'hui). */
+export function estEnCours(evt) {
+    if (evt.statut === "encours") return true;
+    if (evt.statut === "passe" || evt.statut === "a-venir") return false;
+    const now = Date.now();
+    return now >= dateDebut(evt) && now <= dateFin(evt) + JOUR_MS;
+}
+
+/** Un événement est passé si son statut le dit, sinon si sa dernière date est dépassée. */
+export function estPasse(evt) {
+    if (evt.statut === "passe") return true;
+    if (evt.statut === "a-venir" || evt.statut === "encours") return false;
+    if (estEnCours(evt)) return false;
+    return dateFin(evt) < Date.now();
+}
+
+/** Clé de statut affichable : "encours" | "passe" | "a-venir". */
+export function statutDe(evt) {
+    if (estEnCours(evt)) return "encours";
+    if (estPasse(evt)) return "passe";
+    return "a-venir";
+}
+
+/** Prochaine session (aujourd'hui ou à venir), sinon la dernière. */
+export function prochaineSession(evt) {
+    if (!evt.sessions ? .length) return null;
+    const now = Date.now() - JOUR_MS;
+    return evt.sessions.find((s) => datesSession(s).some((d) => d >= now)) || evt.sessions[evt.sessions.length - 1];
+}
+
+export function prochaineDateSession(session) {
+    const now = Date.now() - JOUR_MS;
+    const dates = datesSession(session).filter((d) => d >= now);
+    return dates.length ? Math.min(...dates) : (datesSession(session)[0] || null);
+}
+
+export function statutSession(session) {
+    const dates = datesSession(session);
+    if (!dates.length) return "a-venir";
+    const now = Date.now();
+    if (dates.some((d) => now >= d && now < d + JOUR_MS)) return "encours";
+    if (Math.max(...dates) + JOUR_MS <= now) return "passe";
+    return "a-venir";
+}
+
+export function statutJour(jour) {
+    if (!jour ? .date) return "a-venir";
+    return statutSession({
+        date: jour.date
+    });
+}
+
+/** Événements à venir (et en cours), du plus proche au plus lointain. */
 export function aVenir(liste = evenements) {
-    return liste.filter((e) => !estPasse(e)).sort((a, b) => new Date(a.date) - new Date(b.date));
+    return liste.filter((e) => !estPasse(e)).sort((a, b) => dateDebut(a) - dateDebut(b));
 }
 
 /** Événements passés, du plus récent au plus ancien. */
 export function passes(liste = evenements) {
-    return liste.filter(estPasse).sort((a, b) => new Date(b.date) - new Date(a.date));
+    return liste.filter(estPasse).sort((a, b) => dateFin(b) - dateFin(a));
 }
 
 /** Tous les événements en une seule liste : les prochains d'abord, puis les passés. */

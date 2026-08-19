@@ -2,47 +2,15 @@
 import Layout from "../../components/Layout";
 import leaders from "../../data/leaders";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useTranslation } from "../../hooks/useTranslation";
 
 const ACCENT = "#980000";
 
-// ── TEXTES FR / EN ──────────────────────────────────────────────────────────
-const TEXTES = {
-  fr: {
-    tag:   "Structure du ministère",
-    titre: "NOS LEADERS",
-    intro: "Une équipe appelée, formée et envoyée. Clique sur un visage pour découvrir son parcours.",
-    bio:   "Voir la biographie",
-    // Le libellé de chaque niveau, dans l'ordre du champ `niveau` de data/leaders.js
-    niveaux: {
-      1: "Berger Principal",
-      2: "Administration",
-      3: "Responsables de département",
-    },
-  },
-  en: {
-    tag:   "Ministry structure",
-    titre: "OUR LEADERS",
-    intro: "A team called, trained and sent. Click on a face to discover their journey.",
-    bio:   "Read biography",
-    niveaux: {
-      1: "Senior Pastor",
-      2: "Administration",
-      3: "Department Heads",
-    },
-  },
-};
-
-// Couleur de l'anneau autour de la photo, par niveau.
 const COULEUR_NIVEAU = { 1: ACCENT, 2: "#011224", 3: "#D1D5DB" };
 const couleurDe = (niveau) => COULEUR_NIVEAU[niveau] || "#D1D5DB";
 
-// Les niveaux réellement présents dans les données, du plus haut au plus bas.
-// Ajouter un niveau 4 dans data/leaders.js suffit à créer une nouvelle rangée.
 const niveauxPresents = [...new Set(leaders.map((l) => l.niveau || 99))].sort((a, b) => a - b);
 
-// ── CARTE D'UN LEADER ───────────────────────────────────────────────────────
-// Horizontale sur mobile pour rester lisible, centrée en colonne dès md.
 function LeaderCard({ leader, taille = "small", locale, t }) {
   const nom  = locale === "en" && leader.nom_en  ? leader.nom_en  : leader.nom;
   const role = locale === "en" && leader.role_en ? leader.role_en : leader.role;
@@ -67,7 +35,6 @@ function LeaderCard({ leader, taille = "small", locale, t }) {
       className="group flex flex-row md:flex-col items-center gap-5 md:gap-0 md:text-center bg-white border border-gray-100 md:border-0 p-4 md:p-0 card-shadow md:shadow-none transition-transform duration-300 md:hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
       style={{ outlineColor: couleur }}
     >
-      {/* Photo cerclée dans la couleur du niveau */}
       <span
         className={`relative shrink-0 rounded-full overflow-hidden bg-ash-dark ${dimensions} md:mb-5`}
         style={{ boxShadow: `0 0 0 2px #fff, 0 0 0 4px ${couleur}` }}
@@ -91,30 +58,23 @@ function LeaderCard({ leader, taille = "small", locale, t }) {
           {nom.toUpperCase()}
         </span>
         <span className="block font-accent italic text-gray-500 text-xs md:text-sm">{role}</span>
-
-        {/* Invitation discrète, révélée au survol sur desktop */}
         <span
           className="hidden md:block font-body text-[10px] tracking-[0.2em] uppercase mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ color: couleur }}
         >
-          {t.bio}
+          {t.leaders.bio}
         </span>
       </span>
     </Link>
   );
 }
 
-// ── UNE RANGÉE DE L'ORGANIGRAMME ────────────────────────────────────────────
 function Rangee({ items, taille, locale, t, label, premiere }) {
   const n = items.length;
-  // Les cartes occupent des colonnes de largeur égale : le centre de la première
-  // est donc à 100/(2n) % du bord, ce qui permet d'aligner la barre horizontale
-  // exactement sur les traits verticaux, quel que soit le nombre de personnes.
   const inset = `${100 / (2 * n)}%`;
 
   return (
     <div>
-      {/* Connecteurs vers la rangée précédente */}
       {!premiere && (
         <div aria-hidden="true">
           <span className="block w-px h-10 bg-gray-200 mx-auto" />
@@ -133,14 +93,12 @@ function Rangee({ items, taille, locale, t, label, premiere }) {
         </div>
       )}
 
-      {/* Libellé du niveau */}
       {label && (
         <p className="font-body text-gray-400 text-[10px] tracking-[0.35em] uppercase text-center mb-6">
           {label}
         </p>
       )}
 
-      {/* Les cartes */}
       <ul role="list" className="flex flex-col md:flex-row gap-4 md:gap-6">
         {items.map((l) => (
           <li key={l.slug} className="md:flex-1 md:basis-0 flex md:justify-center">
@@ -153,13 +111,12 @@ function Rangee({ items, taille, locale, t, label, premiere }) {
 }
 
 export default function Leaders() {
-  const { locale } = useRouter();
-  const t = TEXTES[locale] || TEXTES.fr;
+  const { t, locale } = useTranslation();
+  const l = t.leaders;
 
   return (
-    <Layout title={t.titre} description="Organigramme de Génération 7000.">
+    <Layout title={l.title} description={t.meta.leadersDesc}>
 
-      {/* En-tête avec photo de fond */}
       <section className="py-28 px-6 relative"
         style={{
           backgroundImage:    "url('/images/w.jpg')",
@@ -168,36 +125,31 @@ export default function Leaders() {
         }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
-          <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider mb-5">{t.titre}</h1>
-          <p className="font-body text-white/70 text-base leading-relaxed max-w-xl">{t.intro}</p>
+          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{l.tag}</p>
+          <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider mb-5">{l.title}</h1>
+          <p className="font-body text-white/70 text-base leading-relaxed max-w-xl">{l.intro}</p>
         </div>
       </section>
 
-      {/* ORGANIGRAMME */}
       <section className="py-20 px-6 max-w-5xl mx-auto">
         {niveauxPresents.map((niveau, i) => (
           <Rangee
             key={niveau}
-            items={leaders.filter((l) => (l.niveau || 99) === niveau)}
+            items={leaders.filter((item) => (item.niveau || 99) === niveau)}
             taille={i === 0 ? "large" : i === 1 ? "medium" : "small"}
             locale={locale}
             t={t}
-            label={t.niveaux[niveau]}
+            label={l.niveaux[niveau]}
             premiere={i === 0}
           />
         ))}
 
-        {/* Légende, alignée sur les couleurs réellement affichées */}
         <div className="mt-20 pt-10 border-t border-gray-100 flex flex-wrap gap-8 justify-center">
           {niveauxPresents.map((niveau) => (
             <span key={niveau} className="flex items-center gap-2.5">
-              <span
-                className="w-2.5 h-2.5 rounded-full"
-                style={{ backgroundColor: couleurDe(niveau) }}
-              />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: couleurDe(niveau) }} />
               <span className="font-body text-gray-500 text-xs tracking-wide">
-                {t.niveaux[niveau] || `Niveau ${niveau}`}
+                {l.niveaux[niveau] || t.common.level(niveau)}
               </span>
             </span>
           ))}

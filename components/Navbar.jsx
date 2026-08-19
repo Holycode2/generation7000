@@ -16,6 +16,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const { t, locale } = useTranslation();
+  const a = t.a11y;
 
   const navLinks = [
     { href: "/",            label: t.nav.accueil },
@@ -77,7 +78,7 @@ export default function Navbar() {
       <div className="pointer-events-auto max-w-6xl mx-auto">
 
         <nav
-          aria-label="Navigation principale"
+          aria-label={a.mainNav}
           className={`rounded-full border backdrop-blur-xl transition-all duration-300 ${
             scrolled
               ? "bg-ink/95 border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
@@ -129,7 +130,7 @@ export default function Navbar() {
 
               <div
                 role="group"
-                aria-label="Langue"
+                aria-label={a.language}
                 className="flex items-center border border-white/15 rounded-full overflow-hidden"
               >
                 {["fr", "en"].map((code) => (
@@ -165,7 +166,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => setMenuOpen((v) => !v)}
-                aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-label={menuOpen ? a.closeMenu : a.openMenu}
                 aria-expanded={menuOpen}
                 aria-controls="menu-mobile"
                 className="w-9 h-9 flex items-center justify-center rounded-full text-white hover:bg-white/10 transition-colors"

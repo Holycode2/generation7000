@@ -153,7 +153,8 @@ function SectionPlateforme({ plateforme, comptes, t, isEn }) {
               {titre.toUpperCase()}
             </h2>
             <p className="font-body text-gray-400 text-xs tracking-widest uppercase mt-1">
-              {comptes.length} {comptes.length > 1 ? (isEn ? "accounts" : "comptes") : (isEn ? "account" : "compte")}
+              {comptes.length}{" "}
+              {comptes.length > 1 ? t.medias.comptes : t.medias.compte}
             </p>
           </div>
         </div>
@@ -188,7 +189,7 @@ export default function Medias() {
   return (
     <Layout
       title={m.title.replace("\n", " ")}
-      description={m.subtitle}
+      description={t.meta.mediasDesc}
       image="/images/IMG_4731.png"
       url="https://g7kministries.online/medias"
     >
@@ -250,7 +251,7 @@ export default function Medias() {
               {m.vedette}
             </p>
             <h2 className="font-display text-4xl text-ink tracking-wider">
-              {isEn ? "MAIN CHANNELS" : "COMPTES PRINCIPAUX"}
+              {m.comptesPrincipaux}
             </h2>
           </div>
           <div className="space-y-5">

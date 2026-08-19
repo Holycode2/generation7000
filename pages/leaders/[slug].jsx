@@ -1,22 +1,10 @@
 import Layout from "../../components/Layout";
 import leaders from "../../data/leaders";
 import Link from "next/link";
+import fr from "../../locales/fr";
+import en from "../../locales/en";
 
-// ── TEXTES FR / EN ──────────────────────────────────────────────────────────
-const TEXTES = {
-  fr: {
-    retour:  "← Retour aux leaders",
-    bio:     "Biographie",
-    versets: "Versets & Citations",
-    tousBtn: "Voir tous les leaders",
-  },
-  en: {
-    retour:  "← Back to leaders",
-    bio:     "Biography",
-    versets: "Verses & Quotes",
-    tousBtn: "See all leaders",
-  },
-};
+const locales = { fr, en };
 
 // ── GÉNÈRE LES CHEMINS POUR CHAQUE LANGUE ───────────────────────────────────
 export async function getStaticPaths() {
@@ -38,7 +26,7 @@ export async function getStaticProps({ params, locale }) {
 
 // ── PAGE ─────────────────────────────────────────────────────────────────────
 export default function LeaderPage({ leader, locale }) {
-  const t = TEXTES[locale] || TEXTES.fr;
+  const t = (locales[locale] || fr).leaders;
 
   if (!leader) return null;
 
@@ -127,7 +115,7 @@ export default function LeaderPage({ leader, locale }) {
       <section className="py-16 px-6 text-center">
         <Link href="/leaders"
           className="border border-ink text-ink font-body text-xs tracking-widest uppercase px-8 py-3 hover:bg-ink hover:text-white transition-all">
-          {t.tousBtn}
+          {t.allBtn}
         </Link>
       </section>
 

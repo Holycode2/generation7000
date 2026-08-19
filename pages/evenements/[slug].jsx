@@ -1,60 +1,34 @@
 // pages/evenements/[slug].jsx — PAGE INDIVIDUELLE D'UN ÉVÉNEMENT — BILINGUE FR/EN
 import Link from "next/link";
 import Layout from "../../components/Layout";
-import evenements, { estPasse } from "../../data/evenements";
-import { CalendarDaysIcon, ClockIcon, MapPinIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import Remnant from "../../components/Remnant";
+import evenements, {
+  estPasse,
+  prochaineSession,
+  statutDe,
+  statutJour,
+  statutSession,
+} from "../../data/evenements";
+import fr from "../../locales/fr";
+import en from "../../locales/en";
+import {
+  ArrowLeftIcon,
+  ArrowUpRightIcon,
+  CalendarDaysIcon,
+  ClockIcon,
+  MapPinIcon,
+  PlayCircleIcon,
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
 
 const ACCENT = "#980000";
+const locales = { fr, en };
 
-const TEXTES = {
-  fr: {
-    retour:       "← Retour aux événements",
-    aVenir:       "À venir",
-    passe:        "Événement passé",
-    date:         "Date",
-    heure:        "Heure",
-    lieu:         "Lieu",
-    theme:        "Thème",
-    description:  "À propos de cet événement",
-    programme:    "Déroulé d'une soirée",
-    sessions:     "LES ENSEIGNEMENTS",
-    intervenant:  "Intervenant",
-    resume:       "Ce qui a été partagé",
-    enPhotos:     "En images",
-    replay:       "Revoir l'enseignement",
-    intervenants: "Intervenants",
-    galerie:      "En images",
-    suivre:       "Suivre en direct",
-    inscrire:     "S'inscrire",
-  },
-  en: {
-    retour:       "← Back to events",
-    aVenir:       "Upcoming",
-    passe:        "Past event",
-    date:         "Date",
-    heure:        "Time",
-    lieu:         "Location",
-    theme:        "Theme",
-    description:  "About this event",
-    programme:    "How an evening unfolds",
-    sessions:     "THE TEACHINGS",
-    intervenant:  "Speaker",
-    resume:       "What was shared",
-    enPhotos:     "In pictures",
-    replay:       "Watch the replay",
-    intervenants: "Speakers",
-    galerie:      "In pictures",
-    suivre:       "Watch live",
-    inscrire:     "Register",
-  },
-};
-
-// Une page statique par événement et par langue.
 export async function getStaticPaths() {
-  const locales = ["fr", "en"];
+  const langs = ["fr", "en"];
   const paths = [];
   evenements.forEach((evt) => {
-    locales.forEach((locale) => {
+    langs.forEach((locale) => {
       paths.push({ params: { slug: evt.slug }, locale });
     });
   });
@@ -66,26 +40,83 @@ export async function getStaticProps({ params, locale }) {
   return { props: { evenement, locale: locale || "fr" } };
 }
 
+function tr(obj, isEn, champ) {
+  return isEn && obj[`${champ}_en`] ? obj[`${champ}_en`] : obj[champ];
+}
+
+function Badge({ statut, t }) {
+  const labels = { encours: t.encours, passe: t.passe, "a-venir": t.aVenir };
+  const styles = {
+    encours: { backgroundColor: ACCENT, color: "#fff" },
+    "a-venir": { backgroundColor: "#fff", color: "#011224" },
+    passe: { backgroundColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.8)" },
+  };
+  return (
+    <span
+      className="font-body text-[10px] tracking-[0.28em] uppercase px-3 py-1.5"
+      style={styles[statut] || styles["a-venir"]}
+    >
+      {labels[statut]}
+    </span>
+  );
+}
+
+function LigneInfo({ Icone, label, valeur }) {
+  if (!valeur) return null;
+  return (
+    <div className="flex gap-4 items-start">
+      <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center shrink-0">
+        <Icone className="w-4 h-4 text-gray-500" />
+      </div>
+      <div>
+        <p className="font-body text-gray-400 text-[10px] tracking-[0.28em] uppercase mb-1">{label}</p>
+        <p className="font-body text-ink text-sm leading-snug">{valeur}</p>
+      </div>
+    </div>
+  );
+}
+
+function Portrait({ nom, photo, taille = "w-12 h-12" }) {
+  const initiales = nom.split(" ").map((w) => w[0]).join("").slice(0, 2);
+  return (
+    <div className={`${taille} rounded-full overflow-hidden bg-ash-dark shrink-0 flex items-center justify-center`}>
+      {photo ? (
+        <img
+          src={photo}
+          alt={nom}
+          className="w-full h-full object-cover"
+          onError={(e) => { e.target.style.display = "none"; }}
+        />
+      ) : (
+        <span className="font-display text-sm text-gray-400">{initiales}</span>
+      )}
+    </div>
+  );
+}
+
 export default function EvenementPage({ evenement, locale }) {
-  const t = TEXTES[locale] || TEXTES.fr;
+  const t = (locales[locale] || fr).eventDetail;
   if (!evenement) return null;
 
   const isEn = locale === "en";
-  const tr = (champ) => (isEn && evenement[`${champ}_en`] ? evenement[`${champ}_en`] : evenement[champ]);
+  const titre = tr(evenement, isEn, "titre");
+  const sousTitre = tr(evenement, isEn, "sousTitre");
+  const theme = tr(evenement, isEn, "theme");
+  const lieu = tr(evenement, isEn, "lieu");
+  const description = tr(evenement, isEn, "description");
 
-  const titre       = tr("titre");
-  const sousTitre   = tr("sousTitre");
-  const theme       = tr("theme");
-  const lieu        = tr("lieu");
-  const description = tr("description");
-
-  const passe      = estPasse(evenement);
+  const statut = statutDe(evenement);
+  const passe = estPasse(evenement);
   const dateLongue = new Date(evenement.date).toLocaleDateString(isEn ? "en-US" : "fr-FR", {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 
-  const lienAction  = evenement.lienInscription || evenement.lienInstagram;
+  const lienAction = evenement.lienInscription || evenement.lienInstagram;
   const labelAction = evenement.lienInscription ? t.inscrire : t.suivre;
+  const next = prochaineSession(evenement);
+  const soirsNext = next?.jours?.length
+    ? next.jours
+    : (next?.date ? [{ date: next.date, heure: next.heure }] : []);
 
   return (
     <Layout
@@ -95,170 +126,182 @@ export default function EvenementPage({ evenement, locale }) {
       url={`https://g7kministries.online/evenements/${evenement.slug}`}
     >
 
-      {/* Retour */}
-      <div className="max-w-5xl mx-auto px-6 pt-28">
-        <Link href="/evenements" className="font-body text-gray-400 hover:text-ink text-xs tracking-widest uppercase transition-colors">
-          {t.retour}
-        </Link>
-      </div>
+      {/* ── HERO ─────────────────────────────────────────── */}
+      <section className="relative min-h-[78vh] flex items-end overflow-hidden">
+        {evenement.image && (
+          <img
+            src={evenement.image}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/25" />
 
-      {/* Hero avec l'affiche en fond */}
-      <section className="py-20 px-6 relative"
-        style={{
-          backgroundImage:    `url('${evenement.image || "/images/event-placeholder.jpg"}')`,
-          backgroundSize:     "cover",
-          backgroundPosition: "center",
-        }}>
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="flex flex-wrap items-center gap-4 mb-5">
-            <span
-              className="font-body text-white text-[10px] tracking-[0.3em] uppercase px-3 py-1.5"
-              style={{ backgroundColor: passe ? "rgba(255,255,255,0.15)" : ACCENT }}
-            >
-              {passe ? t.passe : t.aVenir}
-            </span>
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-28 pb-14 md:pb-20">
+          <Link
+            href="/evenements"
+            className="inline-flex items-center gap-2 font-body text-white/60 hover:text-white text-xs tracking-widest uppercase mb-10 transition-colors"
+          >
+            <ArrowLeftIcon className="w-3.5 h-3.5" />
+            {t.retour}
+          </Link>
+
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <Badge statut={statut} t={t} />
             {sousTitre && (
-              <p className="font-body text-white/60 text-xs tracking-[0.4em] uppercase">{sousTitre}</p>
+              <p className="font-body text-white/55 text-xs tracking-[0.35em] uppercase">{sousTitre}</p>
+            )}
+            {evenement.sessions?.length > 0 && (
+              <p className="font-body text-white/55 text-xs tracking-[0.22em] uppercase">
+                {t.sessionsIntro(evenement.sessions.length)}
+              </p>
             )}
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl text-white tracking-wider mb-4">{titre}</h1>
-
+          <h1 className="font-display text-5xl md:text-7xl text-white tracking-wider leading-none mb-5 max-w-4xl">
+            {titre}
+          </h1>
           {theme && (
-            <p className="font-accent italic text-white/70 text-lg md:text-xl mb-6">« {theme} »</p>
+            <p className="font-accent italic text-white/75 text-xl md:text-2xl mb-8">« {theme} »</p>
           )}
 
-          <div className="flex flex-wrap gap-x-8 gap-y-2 font-body text-white/70 text-sm">
-            <span className="capitalize">{dateLongue}</span>
-            {evenement.heure && <span>{evenement.heure}</span>}
-            <span>{lieu}</span>
+          <div className="flex flex-wrap gap-x-7 gap-y-2 font-body text-white/70 text-sm">
+            <span className="inline-flex items-center gap-2 capitalize">
+              <CalendarDaysIcon className="w-4 h-4" /> {dateLongue}
+            </span>
+            {evenement.heure && (
+              <span className="inline-flex items-center gap-2">
+                <ClockIcon className="w-4 h-4" /> {evenement.heure}
+              </span>
+            )}
+            <span className="inline-flex items-center gap-2">
+              <MapPinIcon className="w-4 h-4" /> {lieu}
+            </span>
           </div>
+
+          {lienAction && !passe && (
+            <a
+              href={lienAction}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-10 bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-7 py-3.5 hover:bg-[#b00000] transition-colors"
+            >
+              {labelAction}
+              <ArrowUpRightIcon className="w-4 h-4" />
+            </a>
+          )}
         </div>
       </section>
 
-      {/* Contenu */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-16">
+      {/* ── CORPS ────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 px-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[16.5rem_1fr] gap-12 lg:gap-16">
 
-          {/* Infos pratiques + action */}
-          <div>
-            <div className="space-y-6">
-              <div className="flex gap-5 items-start">
-                <div className="w-10 h-10 border border-gray-200 flex items-center justify-center flex-shrink-0">
-                  <CalendarDaysIcon className="w-5 h-5 text-gray-600" />
-                </div>
-                <div>
-                  <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-1">{t.date}</p>
-                  <p className="font-body text-gray-700 capitalize">{dateLongue}</p>
-                </div>
+          <aside className="lg:sticky lg:top-28 self-start space-y-8">
+            <div className="bg-ash/60 border border-gray-100 p-7">
+              <p className="font-body text-gray-400 text-[10px] tracking-[0.35em] uppercase mb-6">{t.infos}</p>
+              <div className="space-y-5">
+                <LigneInfo Icone={CalendarDaysIcon} label={t.date} valeur={dateLongue} />
+                <LigneInfo Icone={ClockIcon} label={t.heure} valeur={evenement.heure} />
+                <LigneInfo Icone={MapPinIcon} label={t.lieu} valeur={lieu} />
+                <LigneInfo Icone={SparklesIcon} label={t.theme} valeur={theme} />
               </div>
-
-              {evenement.heure && (
-                <div className="flex gap-5 items-start">
-                  <div className="w-10 h-10 border border-gray-200 flex items-center justify-center flex-shrink-0">
-                    <ClockIcon className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <div>
-                    <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-1">{t.heure}</p>
-                    <p className="font-display text-xl text-ink">{evenement.heure}</p>
-                  </div>
-                </div>
-              )}
-
-              <div className="flex gap-5 items-start">
-                <div className="w-10 h-10 border border-gray-200 flex items-center justify-center flex-shrink-0">
-                  <MapPinIcon className="w-5 h-5 text-gray-600" />
-                </div>
-                <div>
-                  <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-1">{t.lieu}</p>
-                  <p className="font-body text-gray-700">{lieu}</p>
-                </div>
-              </div>
-
-              {theme && (
-                <div className="flex gap-5 items-start">
-                  <div className="w-10 h-10 border border-gray-200 flex items-center justify-center flex-shrink-0">
-                    <SparklesIcon className="w-5 h-5 text-gray-600" />
-                  </div>
-                  <div>
-                    <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-1">{t.theme}</p>
-                    <p className="font-body text-gray-700">{theme}</p>
-                  </div>
-                </div>
+              {lienAction && (
+                <a
+                  href={lienAction}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex w-full justify-center items-center gap-2 bg-[#980000] text-white font-body font-semibold text-[11px] tracking-widest uppercase px-5 py-3.5 hover:bg-ink transition-colors"
+                >
+                  {labelAction}
+                  <ArrowUpRightIcon className="w-3.5 h-3.5" />
+                </a>
               )}
             </div>
 
-            {/* Bouton d'action : inscription si fournie, sinon lien Instagram */}
-            {lienAction && (
-              <a href={lienAction} target="_blank" rel="noopener noreferrer"
-                className="mt-10 inline-flex w-full justify-center bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-ink-light transition-all">
-                {labelAction}
-              </a>
-            )}
-          </div>
-
-          {/* Description + programme + intervenants */}
-          <div>
-            <h2 className="font-display text-2xl text-ink tracking-wider mb-4">{t.description}</h2>
-            <div className="divider-left" />
-            <p className="font-body text-gray-600 leading-relaxed whitespace-pre-line mb-12">{description}</p>
-
-            {/* Programme */}
-            {evenement.programme?.length > 0 && (
-              <div className="mb-12">
-                <h2 className="font-display text-2xl text-ink tracking-wider mb-4">{t.programme}</h2>
-                <div className="divider-left" />
-                <ol className="border-l border-gray-200 space-y-8 pl-8 mt-8">
-                  {evenement.programme.map((etape, i) => (
-                    <li key={i} className="relative">
-                      <span
-                        className="absolute -left-[37px] top-1.5 w-2.5 h-2.5 rounded-full"
-                        style={{ backgroundColor: ACCENT }}
-                      />
-                      {etape.heure && (
-                        <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-1">
-                          {etape.heure}
-                        </p>
-                      )}
-                      <p className="font-display text-xl text-ink tracking-wide">
-                        {isEn && etape.titre_en ? etape.titre_en : etape.titre}
+            {next && !passe && (
+              <div className="border border-gray-100 p-7">
+                <p className="font-body text-[10px] tracking-[0.35em] uppercase mb-3" style={{ color: ACCENT }}>
+                  {t.prochaine}
+                </p>
+                <p className="font-display text-2xl text-ink tracking-wide leading-tight mb-3">
+                  {tr(next, isEn, "theme") || titre}
+                </p>
+                <ul className="space-y-1.5">
+                  {soirsNext.map((soir) => (
+                    <li key={soir.date} className="font-body text-gray-500 text-sm capitalize">
+                      {new Date(soir.date).toLocaleDateString(isEn ? "en-US" : "fr-FR", {
+                        weekday: "long", day: "numeric", month: "long",
+                      })}
+                      {soir.heure ? ` · ${soir.heure}` : ""}
+                    </li>
+                  ))}
+                </ul>
+                {next.intervenant?.nom && (
+                  <div className="flex items-center gap-3 mt-5 pt-5 border-t border-gray-100">
+                    <Portrait nom={next.intervenant.nom} photo={next.intervenant.photo} />
+                    <div>
+                      <p className="font-body text-ink text-sm">{next.intervenant.nom}</p>
+                      <p className="font-body text-gray-400 text-xs">
+                        {tr(next.intervenant, isEn, "role")}
                       </p>
-                      {(isEn && etape.description_en ? etape.description_en : etape.description) && (
-                        <p className="font-body text-gray-500 text-sm leading-relaxed mt-1">
-                          {isEn && etape.description_en ? etape.description_en : etape.description}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </aside>
+
+          <div>
+            {description && (
+              <div className="mb-14">
+                <p className="flex items-center gap-3 font-body text-gray-400 text-[10px] tracking-[0.35em] uppercase mb-3">
+                  <Remnant tone="dark" />
+                  {t.description}
+                </p>
+                <h2 className="font-display text-3xl md:text-4xl text-ink tracking-wider mb-6">{titre}</h2>
+                <p className="font-body text-gray-600 text-lg leading-relaxed whitespace-pre-line">{description}</p>
+              </div>
+            )}
+
+            {evenement.programme?.length > 0 && (
+              <div className="mb-14">
+                <h2 className="font-display text-2xl text-ink tracking-wider mb-2">{t.programme}</h2>
+                <div className="w-10 h-px bg-ink mb-8" />
+                <ol className="space-y-0">
+                  {evenement.programme.map((etape, i) => (
+                    <li key={i} className="grid grid-cols-[5.5rem_1fr] gap-5 py-5 border-b border-gray-100 last:border-0">
+                      <p className="font-body text-gray-400 text-xs tracking-widest uppercase pt-1">
+                        {etape.heure || String(i + 1).padStart(2, "0")}
+                      </p>
+                      <div>
+                        <p className="font-display text-xl text-ink tracking-wide">
+                          {tr(etape, isEn, "titre")}
                         </p>
-                      )}
+                        {tr(etape, isEn, "description") && (
+                          <p className="font-body text-gray-500 text-sm leading-relaxed mt-1">
+                            {tr(etape, isEn, "description")}
+                          </p>
+                        )}
+                      </div>
                     </li>
                   ))}
                 </ol>
               </div>
             )}
 
-            {/* Intervenants */}
             {evenement.intervenants?.length > 0 && (
               <div>
-                <h2 className="font-display text-2xl text-ink tracking-wider mb-4">{t.intervenants}</h2>
-                <div className="divider-left" />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                <h2 className="font-display text-2xl text-ink tracking-wider mb-2">{t.intervenants}</h2>
+                <div className="w-10 h-px bg-ink mb-8" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {evenement.intervenants.map((p) => (
-                    <div key={p.nom} className="flex items-center gap-4">
-                      <div className="w-14 h-14 bg-ash-dark overflow-hidden flex items-center justify-center flex-shrink-0">
-                        {p.photo ? (
-                          <img src={p.photo} alt={p.nom} className="w-full h-full object-cover"
-                            onError={(e) => { e.target.style.display = "none"; }} />
-                        ) : (
-                          <span className="font-display text-lg text-gray-400">
-                            {p.nom.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-                          </span>
-                        )}
-                      </div>
+                    <div key={p.nom} className="flex items-center gap-4 border border-gray-100 p-4">
+                      <Portrait nom={p.nom} photo={p.photo} taille="w-14 h-14" />
                       <div>
-                        <p className="font-body text-ink">{p.nom}</p>
-                        {(isEn && p.role_en ? p.role_en : p.role) && (
-                          <p className="font-body text-gray-400 text-xs">
-                            {isEn && p.role_en ? p.role_en : p.role}
-                          </p>
+                        <p className="font-display text-lg text-ink tracking-wide">{p.nom}</p>
+                        {tr(p, isEn, "role") && (
+                          <p className="font-body text-gray-400 text-xs">{tr(p, isEn, "role")}</p>
                         )}
                       </div>
                     </div>
@@ -270,115 +313,143 @@ export default function EvenementPage({ evenement, locale }) {
         </div>
       </section>
 
-      {/* Les rendez-vous de l'événement : intervenant, thème et récap en images */}
+      {/* ── SESSIONS ─────────────────────────────────────── */}
       {evenement.sessions?.length > 0 && (
         <section className="py-20 px-6 bg-ash">
           <div className="max-w-5xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl text-ink tracking-wider">{t.sessions}</h2>
-            <div className="divider-left" />
+            <p className="font-body text-gray-400 text-[10px] tracking-[0.35em] uppercase mb-3">
+              {t.sessionsIntro(evenement.sessions.length)}
+            </p>
+            <h2 className="font-display text-3xl md:text-5xl text-ink tracking-wider mb-12">{t.sessions}</h2>
 
-            <div className="space-y-8 mt-10">
+            <div className="space-y-6">
               {evenement.sessions.map((s, i) => {
-                const sTheme  = isEn && s.theme_en  ? s.theme_en  : s.theme;
-                const sResume = isEn && s.resume_en ? s.resume_en : s.resume;
-                const sVerset = isEn && s.verset_en ? s.verset_en : s.verset;
-                const sRole   = s.intervenant && (isEn && s.intervenant.role_en ? s.intervenant.role_en : s.intervenant.role);
-                const sDate   = s.date
-                  ? new Date(s.date).toLocaleDateString(isEn ? "en-US" : "fr-FR", {
-                      day: "numeric", month: "long", year: "numeric",
-                    })
-                  : null;
+                const sTheme = tr(s, isEn, "theme");
+                const sResume = tr(s, isEn, "resume");
+                const sVerset = tr(s, isEn, "verset");
+                const sRole = s.intervenant ? tr(s.intervenant, isEn, "role") : "";
+                const sStatut = statutSession(s);
+                const soirs = s.jours?.length
+                  ? s.jours
+                  : (s.date ? [{ date: s.date, heure: s.heure }] : []);
+                const etiq = sStatut === "encours" ? t.sessionNow : sStatut === "passe" ? t.sessionFaite : t.sessionSoon;
+                const etiqStyle = {
+                  encours: { backgroundColor: ACCENT, color: "#fff" },
+                  passe: { backgroundColor: "#e5e7eb", color: "#6b7280" },
+                  "a-venir": { backgroundColor: "#011224", color: "#fff" },
+                }[sStatut];
 
                 return (
-                  <article key={i} className="bg-white border border-gray-100 card-shadow">
-
-                    {/* En-tête : numéro, date, thème */}
-                    <div className="flex flex-col sm:flex-row gap-6 p-8 border-b border-gray-100">
-                      <div className="flex items-start gap-5 flex-1">
-                        <span className="font-display text-4xl leading-none text-gray-200">
+                  <article key={i} className="bg-white overflow-hidden card-shadow">
+                    <div className="grid grid-cols-1 md:grid-cols-[7.5rem_1fr]">
+                      <div className="bg-ink text-white flex flex-col items-center justify-center py-8 md:py-10 px-4">
+                        <span className="font-display text-4xl leading-none text-white/90">
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <div>
-                          {(sDate || s.heure) && (
-                            <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-2">
-                              {sDate}{s.heure ? ` · ${s.heure}` : ""}
-                            </p>
-                          )}
-                          <h3 className="font-display text-2xl md:text-3xl text-ink tracking-wide">
-                            {sTheme}
-                          </h3>
-                        </div>
+                        <span className="block w-6 h-px my-3" style={{ backgroundColor: ACCENT }} />
+                        <span className="font-body text-[10px] tracking-[0.18em] uppercase text-white/50 text-center leading-relaxed">
+                          {t.deuxSoirs}
+                        </span>
                       </div>
 
-                      {/* Intervenant de la session */}
-                      {s.intervenant?.nom && (
-                        <div className="flex items-center gap-4 sm:border-l sm:border-gray-100 sm:pl-6">
-                          <div className="w-12 h-12 bg-ash-dark overflow-hidden flex items-center justify-center flex-shrink-0 rounded-full">
-                            {s.intervenant.photo ? (
-                              <img src={s.intervenant.photo} alt={s.intervenant.nom}
-                                className="w-full h-full object-cover"
-                                onError={(e) => { e.target.style.display = "none"; }} />
-                            ) : (
-                              <span className="font-display text-base text-gray-400">
-                                {s.intervenant.nom.split(" ").map((w) => w[0]).join("").slice(0, 2)}
-                              </span>
-                            )}
-                          </div>
-                          <div>
-                            <p className="font-body text-gray-400 text-[10px] tracking-widest uppercase">
-                              {t.intervenant}
-                            </p>
-                            <p className="font-body text-ink text-sm">{s.intervenant.nom}</p>
-                            {sRole && <p className="font-body text-gray-400 text-xs">{sRole}</p>}
-                          </div>
+                      <div className="p-7 md:p-9">
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                          <span className="font-body text-[10px] tracking-[0.22em] uppercase px-2.5 py-1" style={etiqStyle}>
+                            {etiq}
+                          </span>
                         </div>
-                      )}
-                    </div>
 
-                    {/* Récap de l'enseignement */}
-                    <div className="p-8">
-                      {sResume && (
-                        <>
-                          <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-3">
-                            {t.resume}
-                          </p>
-                          <p className="font-body text-gray-600 leading-relaxed whitespace-pre-line">
-                            {sResume}
-                          </p>
-                        </>
-                      )}
+                        <h3 className="font-display text-2xl md:text-3xl text-ink tracking-wide mb-6">{sTheme}</h3>
 
-                      {sVerset && (
-                        <blockquote className="border-l-2 pl-6 mt-6" style={{ borderColor: ACCENT }}>
-                          <p className="font-accent italic text-gray-700 leading-relaxed">{sVerset}</p>
-                        </blockquote>
-                      )}
-
-                      {/* Récap en photos */}
-                      {s.photos?.length > 0 && (
-                        <div className="mt-8">
-                          <p className="font-body text-gray-400 text-xs tracking-widest uppercase mb-4">
-                            {t.enPhotos}
-                          </p>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                            {s.photos.map((photo, j) => (
-                              <div key={photo} className="aspect-[4/3] bg-ash-dark overflow-hidden">
-                                <img src={photo} alt={`${sTheme} — ${j + 1}`}
-                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                                  onError={(e) => { e.target.style.display = "none"; }} />
-                              </div>
-                            ))}
+                        {s.intervenant?.nom && (
+                          <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
+                            <Portrait nom={s.intervenant.nom} photo={s.intervenant.photo} taille="w-14 h-14" />
+                            <div>
+                              <p className="font-body text-gray-400 text-[10px] tracking-[0.28em] uppercase mb-0.5">
+                                {t.intervenant}
+                              </p>
+                              <p className="font-display text-xl text-ink tracking-wide">{s.intervenant.nom}</p>
+                              {sRole && <p className="font-body text-gray-400 text-xs">{sRole}</p>}
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
 
-                      {s.lienReplay && (
-                        <a href={s.lienReplay} target="_blank" rel="noopener noreferrer"
-                          style={{ color: ACCENT }}
-                          className="inline-block mt-8 font-body text-xs tracking-widest uppercase border-b border-gray-200 hover:border-current pb-0.5 transition-colors">
-                          {t.replay} →
-                        </a>
-                      )}
+                        {soirs.length > 0 && (
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            {soirs.map((soir) => {
+                              const jStatut = statutJour(soir);
+                              const jLabel = isEn && soir.jour_en ? soir.jour_en : (soir.jour || t.jeudi);
+                              return (
+                                <div key={soir.date} className="border border-gray-100 px-5 py-4">
+                                  <p className="font-body text-[10px] tracking-[0.28em] uppercase mb-1" style={{ color: ACCENT }}>
+                                    {jLabel}
+                                  </p>
+                                  <p className="font-display text-xl text-ink tracking-wide capitalize">
+                                    {new Date(soir.date).toLocaleDateString(isEn ? "en-US" : "fr-FR", {
+                                      day: "numeric", month: "long",
+                                    })}
+                                  </p>
+                                  {soir.heure && (
+                                    <p className="font-body text-gray-500 text-sm mt-1">{soir.heure}</p>
+                                  )}
+                                  {jStatut === "encours" && (
+                                    <p className="font-body text-[10px] tracking-widest uppercase mt-2" style={{ color: ACCENT }}>
+                                      {t.sessionNow}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+
+                        {sResume && sResume.trim() && (
+                          <div className="mb-5">
+                            <p className="font-body text-gray-400 text-[10px] tracking-[0.28em] uppercase mb-2">{t.resume}</p>
+                            <p className="font-body text-gray-600 leading-relaxed whitespace-pre-line">{sResume}</p>
+                          </div>
+                        )}
+
+                        {sVerset && sVerset.trim() && (
+                          <blockquote className="border-l-2 pl-5 my-5" style={{ borderColor: ACCENT }}>
+                            <p className="font-accent italic text-gray-700 leading-relaxed">{sVerset}</p>
+                          </blockquote>
+                        )}
+
+                        {s.photos?.length > 0 && (
+                          <div className="mt-6">
+                            <p className="font-body text-gray-400 text-[10px] tracking-[0.28em] uppercase mb-3">{t.enPhotos}</p>
+                            <div className={`grid gap-2 ${s.photos.length === 1 ? "grid-cols-1" : "grid-cols-2 sm:grid-cols-3"}`}>
+                              {s.photos.map((photo, j) => (
+                                <div
+                                  key={photo}
+                                  className={`overflow-hidden bg-ash-dark ${j === 0 && s.photos.length > 1 ? "sm:col-span-2 sm:row-span-2" : "aspect-[4/3]"}`}
+                                >
+                                  <img
+                                    src={photo}
+                                    alt={`${sTheme} — ${j + 1}`}
+                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                    onError={(e) => { e.target.style.display = "none"; }}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {s.lienReplay && (
+                          <a
+                            href={s.lienReplay}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 mt-6 font-body text-xs tracking-widest uppercase"
+                            style={{ color: ACCENT }}
+                          >
+                            <PlayCircleIcon className="w-4 h-4" />
+                            {t.replay}
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </article>
                 );
@@ -388,17 +459,20 @@ export default function EvenementPage({ evenement, locale }) {
         </section>
       )}
 
-      {/* Galerie (événements passés) */}
+      {/* ── GALERIE ──────────────────────────────────────── */}
       {evenement.galerie?.length > 0 && (
-        <section className="py-16 px-6 bg-ash">
+        <section className="py-20 px-6">
           <div className="max-w-5xl mx-auto">
             <h2 className="font-display text-3xl text-ink tracking-wider mb-8">{t.galerie}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {evenement.galerie.map((photo, i) => (
-                <div key={photo} className="aspect-square bg-ash-dark overflow-hidden">
-                  <img src={photo} alt={`${titre} — ${i + 1}`}
+                <div key={photo} className="aspect-[4/3] bg-ash-dark overflow-hidden">
+                  <img
+                    src={photo}
+                    alt={`${titre} — ${i + 1}`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                    onError={(e) => { e.target.style.display = "none"; }} />
+                    onError={(e) => { e.target.style.display = "none"; }}
+                  />
                 </div>
               ))}
             </div>
@@ -406,14 +480,15 @@ export default function EvenementPage({ evenement, locale }) {
         </section>
       )}
 
-      {/* Retour */}
-      <section className="py-12 px-6 text-center">
-        <Link href="/evenements"
-          className="border border-ink text-ink font-body text-xs tracking-widest uppercase px-8 py-3 hover:bg-ink hover:text-white transition-all">
+      <section className="py-14 px-6 text-center border-t border-gray-100">
+        <Link
+          href="/evenements"
+          className="inline-flex items-center gap-2 border border-ink text-ink font-body text-xs tracking-widest uppercase px-8 py-3.5 hover:bg-ink hover:text-white transition-all"
+        >
+          <ArrowLeftIcon className="w-3.5 h-3.5" />
           {t.retour}
         </Link>
       </section>
-
     </Layout>
   );
 }

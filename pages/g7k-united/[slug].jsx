@@ -3,35 +3,11 @@ import Link from "next/link";
 import Layout from "../../components/Layout";
 import talents from "../../data/talents";
 import IconeReseau from "../../components/IconeReseau";
+import fr from "../../locales/fr";
+import en from "../../locales/en";
 
 const ACCENT = "#980000";
-
-const TEXTES = {
-  fr: {
-    retour:       "← Retour à G7K United",
-    apropos:      "À propos",
-    responsables: "Responsables du pôle",
-    artistes:     "Les artistes du pôle",
-    artistesVide: "[À compléter] Les membres de ce pôle seront présentés ici très bientôt.",
-    suivre:       "Suivre le pôle sur Instagram",
-    ctaTitre:     "REJOINDRE G7K_URBAN",
-    ctaTexte:     "Tu joues, tu chantes, tu composes ? Écris-nous et nous te mettrons en lien avec le responsable.",
-    ctaBtn:       "Nous contacter",
-    autres:       "Les autres pôles",
-  },
-  en: {
-    retour:       "← Back to G7K United",
-    apropos:      "About",
-    responsables: "Team leads",
-    artistes:     "The artists",
-    artistesVide: "[To be completed] The members of this team will be introduced here very soon.",
-    suivre:       "Follow this team on Instagram",
-    ctaTitre:     "JOIN G7K_URBAN ",
-    ctaTexte:     "You play, you sing, you compose? Write to us and we will connect you with the team lead.",
-    ctaBtn:       "Contact us",
-    autres:       "Other teams",
-  },
-};
+const locales = { fr, en };
 
 // Une page statique par pôle et par langue.
 export async function getStaticPaths() {
@@ -57,7 +33,7 @@ export async function getStaticProps({ params, locale }) {
 }
 
 export default function PolePage({ pole, autres, locale }) {
-  const t = TEXTES[locale] || TEXTES.fr;
+  const t = (locales[locale] || fr).united;
   if (!pole) return null;
 
   const isEn = locale === "en";
@@ -239,8 +215,8 @@ export default function PolePage({ pole, autres, locale }) {
       {/* CTA */}
       <section className="py-20 px-6 bg-ink text-center">
         <div className="max-w-xl mx-auto">
-          <h3 className="font-display text-4xl text-white tracking-wider mb-4">{t.ctaTitre}</h3>
-          <p className="font-body text-gray-400 leading-relaxed mb-8">{t.ctaTexte}</p>
+          <h3 className="font-display text-4xl text-white tracking-wider mb-4">{t.rejoindre(nom)}</h3>
+          <p className="font-body text-gray-400 leading-relaxed mb-8">{t.ctaTextePole}</p>
           <Link href="/contact"
             className="inline-block bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-ink-light transition-all">
             {t.ctaBtn}

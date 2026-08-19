@@ -4,6 +4,7 @@ import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import siteConfig from "../data/siteConfig";
+import { useTranslation } from "../hooks/useTranslation";
 
 const DOMAINE = "https://g7kministries.online";
 const SITE_NAME = "G7K Ministries";
@@ -13,11 +14,13 @@ const SITE_LOGO = `${DOMAINE}/images/g7k_favicon-192.png`;
 // `image` et `url` permettent aux pages dynamiques (ex : un événement)
 // de fournir leur propre aperçu de partage.
 export default function Layout({ children, title, description, image, url }) {
+  const { t, locale } = useTranslation();
+
   const pageTitle = title
     ? `${title} — ${SITE_NAME}`
-    : `${SITE_NAME} | Une génération mise à part`;
+    : `${SITE_NAME} | ${t.meta.tagline}`;
 
-  const pageDesc = description || siteConfig.description;
+  const pageDesc = description || (locale === "en" ? siteConfig.description_en : siteConfig.description);
 
   // Les images des données sont des chemins relatifs ("/images/…") :
   // les réseaux sociaux exigent une URL absolue.

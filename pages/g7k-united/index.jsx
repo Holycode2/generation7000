@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import talents from "../../data/talents";
 import siteConfig from "../../data/siteConfig";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useTranslation } from "../../hooks/useTranslation";
 import {
   SparklesIcon,
   MicrophoneIcon,
@@ -30,46 +30,16 @@ const ICONES = {
   ecriture: PencilIcon,
 };
 
-const TEXTES = {
-  fr: {
-    tag:        "Les talents",
-    titre:      "G7K UNITED",
-    accroche:   "Nous formons des ouvriers pour la moisson et développons leurs talents avec soin.",
-    introTag:   "Un corps, plusieurs membres",
-    introTitre: "TROUVE TA PLACE",
-    introTexte: " Tu n'as pas besoin d'être un expert, viens avec ce que tu as.",
-    decouvrir:  "Découvrir les departement→",
-    membres:    (n) => (n > 1 ? `${n} membres` : `${n} membre`),
-    ctaTitre:   "REJOINDRE UN PÔLE",
-    ctaTexte:   "Dis-nous quel talent tu veux mettre au service de la maison, nous te mettrons en lien avec le responsable du departement.",
-    ctaBtn:     "Nous contacter",
-    empty:      "Les pôles seront bientôt annoncés.",
-  },
-  en: {
-    tag:        "The talents",
-    titre:      "G7K UNITED",
-    accroche:   "We train workers for the harvest and carefully develop their gifts.",
-    introTag:   "One body, many members",
-    introTitre: "FIND YOUR PLACE",
-    introTexte: " You don't need to be an expert: come as you are.",
-    decouvrir:  "Discover this team →",
-    membres:    (n) => (n > 1 ? `${n} members` : `${n} member`),
-    ctaTitre:   "JOIN A TEAM",
-    ctaTexte:   "Tell us which talent you would like to put at the service of the house, and we will connect you with the team lead.",
-    ctaBtn:     "Contact us",
-    empty:      "The teams will be announced soon.",
-  },
-};
 
 export default function G7kUnited() {
-  const { locale } = useRouter();
-  const t = TEXTES[locale] || TEXTES.fr;
+  const { t, locale } = useTranslation();
+  const u = t.united;
   const isEn = locale === "en";
 
   return (
     <Layout
-      title={t.titre}
-      description={t.accroche.replace("[Texte à remplacer] ", "").replace("[Text to replace] ", "")}
+      title={u.titre}
+      description={t.meta.unitedDesc}
       image="/images/IMG_4731.png"
       url="https://g7kministries.online/g7k-united"
     >
@@ -85,10 +55,10 @@ export default function G7kUnited() {
       >
         <div className="absolute inset-0 bg-black/65" />
         <div className="max-w-4xl mx-auto relative z-10">
-          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{t.tag}</p>
-          <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider mb-6">{t.titre}</h1>
+          <p className="font-body text-white text-xs tracking-[0.4em] uppercase mb-4">{u.tag}</p>
+          <h1 className="font-display text-6xl md:text-8xl text-white tracking-wider mb-6">{u.titre}</h1>
           <p className="font-body text-white/70 text-base md:text-lg leading-relaxed max-w-2xl">
-            {t.accroche}
+            {u.accroche}
           </p>
         </div>
       </section>
@@ -96,12 +66,12 @@ export default function G7kUnited() {
       {/* ── INTRO ────────────────────────────────────────── */}
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-4">{t.introTag}</p>
+          <p className="font-body text-gray-400 text-xs tracking-[0.4em] uppercase mb-4">{u.introTag}</p>
           <h2 style={{ color: ACCENT }} className="font-display text-4xl md:text-5xl tracking-wider">
-            {t.introTitre}
+            {u.introTitre}
           </h2>
           <div className="divider-ink" />
-          <p className="font-body text-gray-600 leading-relaxed text-lg">{t.introTexte}</p>
+          <p className="font-body text-gray-600 leading-relaxed text-lg">{u.introTexte}</p>
         </div>
       </section>
 
@@ -109,7 +79,7 @@ export default function G7kUnited() {
       <section className="pb-24 px-6">
         <div className="max-w-6xl mx-auto">
           {talents.length === 0 ? (
-            <p className="text-center text-gray-400 font-body py-20">{t.empty}</p>
+            <p className="text-center text-gray-400 font-body py-20">{u.empty}</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {talents.map((pole) => {
@@ -163,10 +133,10 @@ export default function G7kUnited() {
                           style={{ color: ACCENT }}
                           className="font-body text-xs tracking-widest uppercase border-b border-gray-200 group-hover:border-current pb-0.5 transition-colors"
                         >
-                          {t.decouvrir}
+                          {u.decouvrir}
                         </span>
                         {nbMembres > 0 && (
-                          <span className="font-body text-gray-400 text-xs">{t.membres(nbMembres)}</span>
+                          <span className="font-body text-gray-400 text-xs">{u.membres(nbMembres)}</span>
                         )}
                       </div>
                     </div>
@@ -181,14 +151,14 @@ export default function G7kUnited() {
       {/* ── CTA ──────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-ink text-center">
         <div className="max-w-xl mx-auto">
-          <h3 className="font-display text-4xl text-white tracking-wider mb-4">{t.ctaTitre}</h3>
-          <p className="font-body text-gray-400 leading-relaxed mb-8">{t.ctaTexte}</p>
+          <h3 className="font-display text-4xl text-white tracking-wider mb-4">{u.ctaTitre}</h3>
+          <p className="font-body text-gray-400 leading-relaxed mb-8">{u.ctaTexte}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contact"
               className="bg-[#980000] text-white font-body font-semibold text-xs tracking-widest uppercase px-8 py-4 hover:bg-ink-light transition-all"
             >
-              {t.ctaBtn}
+              {u.ctaBtn}
             </Link>
             <a
               href={siteConfig.reseaux.instagram2.url}
